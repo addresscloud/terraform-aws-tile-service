@@ -8,6 +8,8 @@ jobs:
             - uses: hashicorp/setup-terraform@v1
             - name: pwd
               run: pwd
+            - name: ls
+              run: ls
             - name: Terraform fmt
               id: fmt
               run: terraform fmt -check
