@@ -10,7 +10,7 @@ This module uses Amazon API Gateway and S3 to provision a RESTFul vector tile AP
 
 ## How To Use This Module
 
-Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For more advanced examples see the [examples/](examples/) folder.
+Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For further details see [examples/quickstart](examples/quickstart).
 
 ### Quick Start
 
