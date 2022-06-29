@@ -5,7 +5,6 @@ jobs:
     validate-terraform:
         runs-on: ubuntu-latest
         steps:
-            steps:
             - uses: actions/checkout@v2
             - uses: hashicorp/setup-terraform@v2
 
