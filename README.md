@@ -86,7 +86,7 @@ Both endpoints support `OPTIONS` requests for CORS. See [examples]() for header 
 
 ### Caching
 
-This module supports caching tile requests using [API Gateway caching](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html). Caching is disabled by default because it incurs an hourly cost not included in the AWS Free Tier. To enable caching add the following parameters to the module configuration. See [examples/caching]('../examples/caching) for a complete example.
+This module supports caching tile requests using [API Gateway caching](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html). Caching is disabled by default because it incurs an hourly cost not included in the AWS Free Tier. To enable caching add the following parameters to the module configuration. See [examples/caching](examples/caching) for a complete example.
 
 * `api_cache_size` - adding this setting will initialise a dedicated cache cluster in API Gateway.
 * `api_cache_ttl` - adding this setting will enable caching for the tile endpoint. Requires `api_cache_size` to be set. Set the ttl between 0 and 3600. Set to 0 to disable caching on the tile endpoint (useful for debugging). TileJSON requests are never cached.
