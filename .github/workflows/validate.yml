@@ -4,11 +4,8 @@ on: [push]
 jobs:
     validate-terraform:
         runs-on: ubuntu-latest
-        defaults:
-          run:
-            working-directory: ${{ env.tf_actions_working_dir }}
         steps:
-            - uses: hashicorp/setup-terraform@v2
+            - uses: hashicorp/setup-terraform@v1
             - name: Terraform fmt
               id: fmt
               run: terraform fmt -check
