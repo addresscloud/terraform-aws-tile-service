@@ -8,12 +8,6 @@ jobs:
             - uses: actions/checkout@v2
             - uses: hashicorp/setup-terraform@v2
 
-            - name: pwd
-              run: pwd
-
-            - name: ls
-              run: ls
-
             - name: Terraform fmt
               id: fmt
               run: terraform fmt -check
