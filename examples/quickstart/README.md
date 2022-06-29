@@ -10,6 +10,17 @@ This folder contains an example of Terraform code that uses the apigateway-tile-
 
 ## Data
 
+Edit the `tiles` attribute of your TileJSON to point to the new API using the `api_invoke_url` value. For example:
+
+```json
+    ...
+	"tilejson": "3.0.0",
+	"name": "oprvrs",
+	"tiles": ["<API_INVOKE_URL>/default/v1/oprvrs/20220629/{z}/{x}/{y}"],
+	"scheme": "zxy",
+    ...
+```
+
 Upload your TileJSON and tile cache to the new bucket. 
 
 ```sh
@@ -22,7 +33,7 @@ aws s3 cp --recursive cache s3://<BUCKET>/oprvrs/
 
 ## API Key
 
-If you don't have one create a new Usage Plan and API Key and add access to the newly created API. An example of doing this in Terraform can be found in [examples/]().
+If you don't have one create a new Usage Plan and API Key and add access to the newly created API. An example of doing this in Terraform can be found in [examples/api-key](examples/api-key).
 
 ## Test
 

@@ -10,7 +10,7 @@ This module uses Amazon API Gateway and S3 to provision a RESTFul vector tile AP
 
 ## How To Use This Module
 
-Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For more advanced examples see the [examples/]() folder.
+Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For more advanced examples see the [examples/](examples/) folder.
 
 ### Quick Start
 
@@ -50,7 +50,7 @@ Tiles should be stored in the bucket using the layout below.
 
 * The `version` is a directory with any unique URI-safe alphanumeric name to differentiate versions of the tile set. For example `2022-06-28`.
 
-* The `tiles.json` file should be a [TileJSON](https://github.com/mapbox/tilejson-spec) file describing the tileset.
+* The `tiles.json` file should be a [TileJSON](https://github.com/mapbox/tilejson-spec) file describing the tileset and with the `tiles` attribute pointing to the newly created API Gateway instance.
 
 Example complete S3 tile path:
 
@@ -76,7 +76,7 @@ GET /v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
-Both endpoints support `OPTIONS` requests for CORS. See [examples]() for header configuration.
+Both endpoints support `OPTIONS` requests for CORS. See [examples/headers](examples/headers) for header configuration.
 
 ### Example MapLibre Implementation
 
@@ -86,14 +86,14 @@ Both endpoints support `OPTIONS` requests for CORS. See [examples]() for header 
 
 ### Caching
 
-This module supports caching tile requests using [API Gateway caching](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html). Caching is disabled by default because it incurs an hourly cost not included in the AWS Free Tier. To enable caching add the following parameters to the module configuration. See [examples/caching](examples/caching) for a complete example.
+This module supports caching tile requests using [API Gateway caching](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html). Caching is disabled by default because it incurs an hourly cost not included in the AWS Free Tier. To enable caching add the following parameters to the module configuration. See [examples/caching](examples/caching) for further details.
 
 * `api_cache_size` - adding this setting will initialise a dedicated cache cluster in API Gateway.
 * `api_cache_ttl` - adding this setting will enable caching for the tile endpoint. Requires `api_cache_size` to be set. Set the ttl between 0 and 3600. Set to 0 to disable caching on the tile endpoint (useful for debugging). TileJSON requests are never cached.
 
 ### Custom Authorisation
 
-The module supports reference to an authorizer (Lambda) function, which is created outside of the module. Custom Access Control headers for CORS can also be configured. See [examples/]() for a complete example.
+The module supports reference to an authorizer (Lambda) function, which is created outside of the module. Custom Access Control headers for CORS can also be configured. See [examples/authorization](examples/authorization) for a complete example.
 
 ### Deployment Trigger
 
@@ -101,8 +101,9 @@ The module supports reference to an authorizer (Lambda) function, which is creat
 
 ### API Key Configuration
 
-The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/]() demonstrates creation of an API key and usage plan using Terraform for use with the API. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
+The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/api-key](examples/api-key) demonstrates creation of an API key and usage plan using Terraform for use with the API. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
 
 ### Custom Domain Name
 
+See [examples/domain](examples/domain)
 // TODO
