@@ -2,17 +2,17 @@ name: Validate
 on: [push]
 
 jobs:
-  validate-terraform:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: hashicorp/setup-terraform@v2
-    - name: Terraform fmt
-      id: fmt
-      run: terraform fmt -check
-      continue-on-error: false
-    - name: Terraform Init
-      id: init
-      run: terraform init
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
+    validate-terraform:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: hashicorp/setup-terraform@v2
+            - name: Terraform fmt
+              id: fmt
+              run: terraform fmt -check
+              continue-on-error: false
+            - name: Terraform Init
+              id: init
+              run: terraform init
+            - name: Terraform Validate
+              id: validate
+              run: terraform validate -no-color
