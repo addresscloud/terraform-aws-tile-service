@@ -5,18 +5,25 @@ jobs:
     validate-terraform:
         runs-on: ubuntu-latest
         steps:
-            - uses: hashicorp/setup-terraform@v1
+            steps:
+            - uses: actions/checkout@v2
+            - uses: hashicorp/setup-terraform@v2
+
             - name: pwd
               run: pwd
+
             - name: ls
               run: ls
+
             - name: Terraform fmt
               id: fmt
               run: terraform fmt -check
               continue-on-error: false
+
             - name: Terraform Init
               id: init
               run: terraform init
+
             - name: Terraform Validate
               id: validate
               run: terraform validate -no-color
