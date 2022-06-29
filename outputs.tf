@@ -9,6 +9,6 @@ output "api_stage_name" {
 }
 
 output "api_invoke_url" {
-    description = "API invoke URL."
-    value = aws_api_gateway_deployment.tile.invoke_url
+  description = "API invoke URL."
+  value       = aws_api_gateway_deployment.tile.invoke_url
 }
