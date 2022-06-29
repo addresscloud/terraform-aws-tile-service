@@ -10,7 +10,7 @@ This folder contains an example of Terraform code that uses the apigateway-tile-
 
 ## Data
 
-1. Upload your TileJSON and tile cache to the new bucket. 
+Upload your TileJSON and tile cache to the new bucket. 
 
 ```sh
 aws s3 cp tile.json s3://<BUCKET>/oprvrs/tile.json
@@ -22,11 +22,11 @@ aws s3 cp --recursive cache s3://<BUCKET>/oprvrs/
 
 ## API Key
 
-1. If you don't have one create a new Usage Plan and API Key and add access to the newly created API. An example of doing this in Terraform can be found in [examples/]().
+If you don't have one create a new Usage Plan and API Key and add access to the newly created API. An example of doing this in Terraform can be found in [examples/]().
 
 ## Test
 
-1. You should now be able to make requests aginst the API Gateway instance using the `api_invoke_url` value which is output from the module.
+You should now be able to make requests aginst the API Gateway instance using the `api_invoke_url` value which is output from the module.
 
 #### **Get TileJSON**
 ```http

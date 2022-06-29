@@ -2,6 +2,8 @@
 
 This is a Terraform module for provisioning a vector tile service using Amazon API Gateway and Amazon S3. This module will provide a fully functional vector tile service which is scaleable, highly available and fault-tolerant. The service works by mapping API requests to a cache of vector tiles stored in the S3 bucket.
 
+![Service diagram](../_doc/diagram.png)
+
 ## About This Module
 
 This module uses Amazon API Gateway and S3 to provision a RESTFul vector tile API suitable for consumption using modern mapping applications such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/). API Gateway is particularly useful when advanced authorization configuration is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. This module is maintained by [Addresscloud]().
