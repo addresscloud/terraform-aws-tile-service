@@ -27,7 +27,7 @@ variable "api_access_control_allow_headers" {
 
 variable "api_cache_size" {
   description = "API cache cluster size in gigabytes. Used to cache responses from the GET tile endpoint, requests to tile.json are not cached. Allowed values include `0.5`, `1.6`, `6.1`, `13.5`, `28.4`, `58.2`, `118` and `237`. Note that API caching is not covered by the AWS Free Tier and will incur an hourly charge."
-  default     = null
+  default     = 0
   type        = number
 }
 
@@ -39,13 +39,13 @@ variable "api_cache_ttl" {
 
 variable "api_custom_authorizer_arn" {
   description = "ARN for custom authorizer Lambda function triggered for all endpoints."
-  default     = null
+  default     = ""
   type        = string
 }
 
 variable "api_deployment_trigger" {
   description = "A value used to trigger API deployments. If not set then the module will use an internal timestamp to force redeployment for each Terraform run. See the examples for more advanced configuration."
-  default     = null
+  default     = ""
   type        = string
 }
 
