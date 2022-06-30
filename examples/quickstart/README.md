@@ -33,7 +33,7 @@ aws s3 cp --recursive cache s3://<BUCKET>/oprvrs/
 
 ## API Key
 
-If you don't have one create a new Usage Plan and API Key and add access to the newly created API. An example of doing this in Terraform can be found in [examples/api-key](examples/api-key).
+If you don't have one create a new Usage Plan and API Key and add access to the newly created API. An example of doing this in Terraform can be found in [examples/api-key](../examples/api-key).
 
 ## Test
 

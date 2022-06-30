@@ -4,7 +4,7 @@ By default the module requires an API key to access all endpoints. Because API k
 
 ## Terraform 
 
-The Terraform code in [main.tf](examples/api-key/main.tf) creates a usage plan "dev" and an API key "developer-api-key" and links them to the tile API. The output `dev_api_key` is the value that can be included in the `x-api-key` header.
+The Terraform code in [main.tf](main.tf) creates a usage plan "dev" and an API key "developer-api-key" and links them to the tile API. The output `dev_api_key` is the value that can be included in the `x-api-key` header.
 
 Note that this example also demonstrates setting the stage name to a custom variable ("dev") instead of the default value ("default") which can be useful when working with different environments.
 
