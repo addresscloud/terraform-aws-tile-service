@@ -8,6 +8,14 @@ This is a Terraform module for provisioning a vector tile service using Amazon A
 
 This module uses Amazon API Gateway and S3 to provision a RESTFul vector tile API suitable for consumption using modern mapping applications such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/). API Gateway is particularly useful when advanced authorization configuration is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. This module is maintained by [Addresscloud]().
 
+### Alternatives
+
+These alternatives, which influenced the design of this module, should be considered if API Gateway features are not needed.
+
+- [CloudFront + S3](https://github.com/addresscloud/serverless-tiles) the cheapest way to self-host tiles
+- [TiTiler](https://github.com/developmentseed/titiler) supports multiple data types including rasters using Lambda functions
+- [MapTiler Cloud](https://www.maptiler.com/cloud/) excellent commercial solution when self-hosting is not required
+
 ## How To Use This Module
 
 Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For further details see [examples/quickstart](examples/quickstart).
@@ -29,7 +37,7 @@ module "tile" {
 
 ### Vector Tile Requirements
 
-Vector tiles should be `.pbf` (protocol buffers) files with `gzip` content encoding stored in the Slippy Map Tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames) (`{z}/{x}/{y}.pbf`) in the tileset directory. Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
+Vector tiles should be `.pbf` (protocol buffers) files with `gzip` content encoding stored in the Slippy Map Tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames) (`{z}/{x}/{y}.pbf`). Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
 
 ### Bucket layout
 
@@ -46,7 +54,7 @@ Tiles should be stored in the bucket using the layout below.
 ```
 * Where `<NEW_BUCKET_NAME>` is the bucket defined in the `s3_bucket_name` variable.
 
-* The `tileset` is a directory with any unique URI-safe alphanumeric name to identify individual tile sets. For example `oprvrs` for the Ordnance Survey's Open Rivers tileset show in the [demo]().
+* The `tileset` is a directory with any unique URI-safe alphanumeric name to identify individual tile sets.
 
 * The `version` is a directory with any unique URI-safe alphanumeric name to differentiate versions of the tile set. For example `2022-06-28`.
 
@@ -58,6 +66,10 @@ Example complete S3 tile path:
 s3://<NEW_BUCKET_NAME>/oprvrs/2022-04-01/0/494/347.pbf
 ```
 
+### Outputs
+
+The module outputs the variable `api_invoke_url` which is the public URL for the API. 
+
 ## API
 
 ### Endpoints
@@ -66,13 +78,13 @@ This module exposes two endpoints:
 
 #### **Get TileJSON**
 ```http
-GET /v1/{tileset}/
+GET {api_invoke_url}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
 #### **Get a tile**
 ```http
-GET /v1/{tileset}/{z}/{x}/{y}
+GET {api_invoke_url}/v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
@@ -80,7 +92,11 @@ Both endpoints support `OPTIONS` requests for CORS. See [examples/headers](examp
 
 ### Example MapLibre Implementation
 
-// TODO
+See [examples/quickstart](examples/quickstart).
+
+### Version Path
+
+The module includes a `v1` in the path to future proof against breaking changes to the API.
 
 ## Advanced Usage
 
@@ -91,7 +107,7 @@ This module supports caching tile requests using [API Gateway caching](https://d
 * `api_cache_size` - adding this setting will initialise a dedicated cache cluster in API Gateway.
 * `api_cache_ttl` - adding this setting will enable caching for the tile endpoint. Requires `api_cache_size` to be set. Set the ttl between 0 and 3600. Set to 0 to disable caching on the tile endpoint (useful for debugging). TileJSON requests are never cached.
 
-### Custom Authorisation
+### Custom Authorization
 
 The module supports reference to an authorizer (Lambda) function, which is created outside of the module. Custom Access Control headers for CORS can also be configured. See [examples/authorization](examples/authorization) for a complete example.
 
@@ -107,3 +123,15 @@ The module automatically requires an API Gateway API key to be present in all re
 
 See [examples/domain](examples/domain)
 // TODO
+
+## Maintainers
+
+[@tomasholderness](https://github.com/tomasholderness)
+
+## Contributing
+
+PRs accepted.
+
+## License
+
+MIT © 2022 Addresscloud Limited
