@@ -1,3 +1,0 @@
-# Authorizer Example
-
-TODO.
