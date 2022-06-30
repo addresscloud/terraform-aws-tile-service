@@ -1,3 +1,0 @@
-# Headers Example
-
-TODO.

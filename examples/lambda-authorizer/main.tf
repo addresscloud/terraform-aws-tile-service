@@ -1,12 +1,19 @@
-# Lambda Authorizer Example
+terraform {
+  backend "local" {}
+}
 
-API Gateway supports Lambda authorizer functions to control access to the tile service using custom authorization logic. This example assumes that a Lambda authorizer has already be created which is referenced in the configuration. See the [AWS documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html) for more details on creating Lambda authorizers.
+variable "region" {
+  description = "Your AWS region."
+}
 
-## Lambda Authorizer Setup
+variable "bucket" {
+  description = "Your S3 bucket name."
+}
 
-This example uses the `data` block to reference an existing function in the same account and region as the tile API Gateway instance. The `identity_source` parameter sets the header value to be used. An `aws_lambda_permission` block is used to grant API Gateway permission to execute the function.
+provider "aws" {
+  region = var.region
+}
 
-```terraform
 data "aws_lambda_function" "authorizer" {
   function_name = "demoCustomAuthorizer"
 }
@@ -26,13 +33,7 @@ resource "aws_lambda_permission" "demoAuth" {
   function_name = data.aws_lambda_function.authorizer.function_name
   principal     = "apigateway.amazonaws.com"
 }
-```
 
-## Module Setup
-
-Once the authorizer and permissions have been confgured, the module can be set to include the additional header for the identity source and the access control origin set to a specific domain to restrict cross-site access.
-
-```terraform
 module "tile" {
   source                           = "addresscloud/tile-service/aws"
   api_custom_authorizer_arn        = aws_api_gateway_authorizer.demoAuth.id
@@ -47,4 +48,3 @@ output "api_invoke_url" {
   description = "Output the invoke URL once the API is deployed."
   value       = module.tile.api_invoke_url
 }
-```terraform

@@ -90,7 +90,7 @@ GET /{api_invoke_url}/v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
-Both endpoints support `OPTIONS` requests for CORS. See [examples/headers](examples/headers) for header configuration.
+Both endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](examples/lambda-authorizer) for a header configuration example.
 
 ### Example MapLibre Implementation
 
