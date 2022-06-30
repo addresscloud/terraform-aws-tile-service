@@ -51,4 +51,21 @@ GET <API_INVOKE_URL/default/v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
-## 
+## MapLibre Example
+
+```js
+var map = new maplibregl.Map({
+    container: 'map',
+    style: style,
+    center: [-1.737832, 52.814301],
+    zoom: 12,
+    transformRequest: (url, resourceType) => {
+        if (url.startsWith('<api_invoke_url>')) {
+            return {
+                url,
+                headers: { 'x-api-key': '<dev_api_key>'}
+            }
+        }
+    }
+});
+```
