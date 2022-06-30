@@ -80,13 +80,13 @@ This module exposes two endpoints:
 
 #### **Get TileJSON**
 ```http
-GET {api_invoke_url}/v1/{tileset}/
+GET /{api_invoke_url}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
 #### **Get a tile**
 ```http
-GET {api_invoke_url}/v1/{tileset}/{z}/{x}/{y}
+GET /{api_invoke_url}/v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
