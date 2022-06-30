@@ -30,7 +30,7 @@ provider "aws" {
 }
 
 module "tile" {
-  source            = "../modules/tile/"
+  source            = "addresscloud/tile-service/aws"
   api_name          = "tile-service"
   api_region        = "<REGION>"
   s3_bucket_name    = "<NEW_BUCKET_NAME>"
@@ -111,11 +111,11 @@ This module supports caching tile requests using [API Gateway caching](https://d
 
 ### Custom Authorization
 
-The module supports reference to an authorizer (Lambda) function, which is created outside of the module. Custom Access Control headers for CORS can also be configured. See [examples/authorization](examples/authorization) for a complete example.
+The module supports reference to a Lambda authorizer function, which is created outside of the module. Custom Access Control headers for CORS can also be configured. See [examples/lambda-authorizer](examples/lambda-authorizer) for a complete example.
 
 ### Deployment Trigger
 
-// TODO
+The module supports the `api_deployment_trigger` for fine-grained control of API deployments. See [examples/deployment-trigger](examples/deployment-trigger) for details.
 
 ### API Key Configuration
 
