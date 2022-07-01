@@ -1,5 +1,5 @@
 resource "aws_api_gateway_method_settings" "all" {
-  depends_on  = [aws_api_gateway_deployment.tile]
+  depends_on  = [aws_api_gateway_deployment.tile, aws_api_gateway_stage.tile]
   rest_api_id = aws_api_gateway_rest_api.tile.id
   stage_name  = var.api_stage_name
   method_path = "*/*"
@@ -13,7 +13,7 @@ resource "aws_api_gateway_method_settings" "all" {
 }
 
 resource "aws_api_gateway_method_settings" "tile" {
-  depends_on  = [aws_api_gateway_deployment.tile]
+  depends_on  = [aws_api_gateway_deployment.tile, aws_api_gateway_stage.tile]
   rest_api_id = aws_api_gateway_rest_api.tile.id
   stage_name  = var.api_stage_name
   method_path = "v1/{tileset}/{version}/{z}/{x}/{y}/GET"
