@@ -11,7 +11,13 @@ resource "aws_api_gateway_deployment" "tile" {
   triggers = {
     "redeployment" = local.trigger
   }
-  depends_on = [aws_api_gateway_rest_api.tile]
+  depends_on = [
+    aws_api_gateway_rest_api.tile,
+    aws_api_gateway_method.json_get,
+    aws_api_gateway_method.json_options,
+    aws_api_gateway_method.tile_get,
+    aws_api_gateway_method.tile_options
+  ]
 }
 
 resource "aws_api_gateway_stage" "tile" {
