@@ -48,7 +48,7 @@ Tiles should be stored in the bucket using the layout below.
 ```
 <NEW_BUCKET_NAME>/
   {tileset}/
-    tiles.json
+    tile.json
     {version}/
       {z}/
         {x}/
@@ -60,7 +60,7 @@ Tiles should be stored in the bucket using the layout below.
 
 * The `version` is a directory with any unique URI-safe alphanumeric name to differentiate versions of the tile set. For example `2022-06-28`.
 
-* The `tiles.json` file should be a [TileJSON](https://github.com/mapbox/tilejson-spec) file describing the tileset and with the `tiles` attribute pointing to the newly created API Gateway instance.
+* The `tile.json` file should be a [TileJSON](https://github.com/mapbox/tilejson-spec) file describing the tileset and with the `tiles` attribute pointing to the newly created API Gateway instance.
 
 Example complete S3 tile path:
 
