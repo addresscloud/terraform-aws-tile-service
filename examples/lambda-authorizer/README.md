@@ -47,4 +47,4 @@ output "api_invoke_url" {
   description = "Output the invoke URL once the API is deployed."
   value       = module.tile.api_invoke_url
 }
-```terraform
+```
