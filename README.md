@@ -6,6 +6,10 @@ This Terraform module provisions a vector tile service using Amazon API Gateway 
 
 ![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/diagram.png)
 
+## Demo
+
+https://addresscloud.github.io/terraform-aws-tile-service/
+
 ## Table of Contents
 
 - [About](#about)
@@ -20,7 +24,7 @@ This Terraform module provisions a vector tile service using Amazon API Gateway 
 
 The module uses Amazon API Gateway and S3 to provision a vector tile API suitable for modern mapping libraries such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/).
 
-API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that service is highly-scaleable.
+API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that the service is highly-scaleable.
 
 This module is maintained by [Addresscloud](https://github.com/addresscloud/).
 
