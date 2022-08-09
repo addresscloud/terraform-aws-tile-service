@@ -8,13 +8,13 @@ This Terraform module provisions a vector tile service using Amazon API Gateway 
 
 ## Table of Contents
 
-- About(#about)
-- Install(#install)
-- API(#API)
-- Additional Options(#additional-options)
-- Maintainers(#maintainers)
-- Contributing(#contributing)
-- License(#license)
+- [About](#about)
+- [Install](#install)
+- [API](#API)
+- [Additional Options](#additional-options)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## About
 
