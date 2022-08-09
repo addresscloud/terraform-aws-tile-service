@@ -18,9 +18,9 @@ This Terraform module provisions a vector tile service using Amazon API Gateway 
 
 ## About
 
-The module uses Amazon API Gateway and S3 to provision a RESTFul vector tile API suitable for modern mapping libraries such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/).
+The module uses Amazon API Gateway and S3 to provision a vector tile API suitable for modern mapping libraries such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/).
 
-API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The modules serverless architecture means that the tile serving is highly-scaleable.
+API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that service is highly-scaleable.
 
 This module is maintained by [Addresscloud](https://github.com/addresscloud/).
 
@@ -53,7 +53,7 @@ module "tile" {
 
 ### Vector Tile Requirements
 
-Vector tiles should be `.pbf` (protocol buffers) files with `gzip` content encoding stored in the Slippy Map Tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames) (`{z}/{x}/{y}.pbf`). Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
+Vector tiles should be protocol buffers (`.pbf`) files with gzip content encoding stored in the [Slippy map tilenames specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames) (`{z}/{x}/{y}.pbf`). Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
 
 ### Bucket layout
 
