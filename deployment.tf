@@ -1,5 +1,5 @@
 locals {
-  trigger = var.api_deployment_trigger != "" ? null : timestamp()
+  trigger = var.api_deployment_trigger != "" ? var.api_deployment_trigger : timestamp()
 }
 
 resource "aws_api_gateway_deployment" "tile" {

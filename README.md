@@ -129,7 +129,7 @@ The module supports reference to a Lambda authorizer function, which is created 
 
 ### Deployment Trigger
 
-The module supports the `api_deployment_trigger` for fine-grained control of API deployments. See [examples/deployment-trigger](examples/deployment-trigger) for details.
+The module supports the `api_deployment_trigger` for fine-grained control of API deployments. Where a deployment trigger isn't specified the module defaults to using a unique timestamp on each terraform run. See [examples/deployment-trigger](examples/deployment-trigger) for details.
 
 ### API Key Configuration
 
