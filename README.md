@@ -2,27 +2,41 @@
 
 [![Validate](https://github.com/addresscloud/terraform-aws-tile-service/actions/workflows/validate.yml/badge.svg)](https://github.com/addresscloud/terraform-aws-tile-service/actions/workflows/validate.yml)
 
-This is a Terraform module for provisioning a vector tile service using Amazon API Gateway and Amazon S3. This module will provide a fully functional vector tile service which is scaleable, highly available and fault-tolerant. The service works by mapping API requests to a cache of vector tiles stored in the S3 bucket.
+This Terraform module provisions a vector tile service using Amazon API Gateway and S3. API requests are mapped to a cache of vector tiles stored in an S3 bucket. The service is completely serverless.
 
 ![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_doc/diagram.png)
 
-## About This Module
+## Table of Contents
 
-This module uses Amazon API Gateway and S3 to provision a RESTFul vector tile API suitable for consumption using modern mapping applications such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/). API Gateway is particularly useful when advanced authorization configuration is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. This module is maintained by [Addresscloud]().
+- About(#about)
+- Install(#install)
+- API(#API)
+- Additional Options(#additional-options)
+- Maintainers(#maintainers)
+- Contributing(#contributing)
+- License(#license)
+
+## About
+
+The module uses Amazon API Gateway and S3 to provision a RESTFul vector tile API suitable for modern mapping libraries such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/).
+
+API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The modules serverless architecture means that the tile serving is highly-scaleable.
+
+This module is maintained by [Addresscloud](https://github.com/addresscloud/).
 
 ### Alternatives
 
-These alternatives, which influenced the design of this module, should be considered if API Gateway features are not needed.
+These alternatives influenced the design of this module should be considered if API Gateway features are not needed.
 
 - [CloudFront + S3](https://github.com/addresscloud/serverless-tiles) the cheapest way to self-host tiles
 - [TiTiler](https://github.com/developmentseed/titiler) supports multiple data types including rasters using Lambda functions
 - [MapTiler Cloud](https://www.maptiler.com/cloud/) excellent commercial solution when self-hosting is not required
 
-## How To Use This Module
+## Install
 
 Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For further details see [examples/quickstart](examples/quickstart).
 
-### Quick Start
+### Terraform
 
 ```terraform
 provider "aws" {
@@ -100,11 +114,11 @@ See [examples/quickstart](examples/quickstart).
 
 The module includes a `v1` in the path to future proof against breaking changes to the API.
 
-## Advanced Usage
+## Additional Options
 
 ### Caching
 
-This module supports caching tile requests using [API Gateway caching](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html). Caching is disabled by default because it incurs an hourly cost not included in the AWS Free Tier. To enable caching add the following parameters to the module configuration. See [examples/caching](examples/caching) for further details.
+The module supports caching tile requests using [API Gateway caching](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html). Caching is disabled by default because it incurs an hourly cost not included in the AWS Free Tier. To enable caching add the following parameters to the module configuration. See [examples/caching](examples/caching) for further details.
 
 * `api_cache_size` - adding this setting will initialise a dedicated cache cluster in API Gateway.
 * `api_cache_ttl` - adding this setting will enable caching for the tile endpoint. Requires `api_cache_size` to be set. Set the ttl between 0 and 3600. Set to 0 to disable caching on the tile endpoint (useful for debugging). TileJSON requests are never cached.
@@ -124,7 +138,6 @@ The module automatically requires an API Gateway API key to be present in all re
 ### Custom Domain Name
 
 See [examples/domain](examples/domain)
-// TODO
 
 ## Maintainers
 
