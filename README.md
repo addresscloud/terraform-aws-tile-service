@@ -53,7 +53,11 @@ module "tile" {
 
 ### Vector Tile Requirements
 
-Vector tiles should be protocol buffers (`.pbf`) files with gzip content encoding stored in the [Slippy map tilenames specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames) (`{z}/{x}/{y}.pbf`). Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
+* protocol buffers (`.pbf`)
+* gzip content encoding
+* [slippy map tilenames specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
+
+Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
 
 ### Bucket layout
 
