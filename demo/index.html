@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+                  _     _                        _                 _ 
+         /\      | |   | |                      | |               | |
+        /  \   __| | __| |_ __ ___  ___ ___  ___| | ___  _   _  __| |
+       / /\ \ / _` |/ _` | '__/ _ \/ __/ __|/ __| |/ _ \| | | |/ _` |
+      / ____ \ (_| | (_| | | |  __/\__ \__ \ (__| | (_) | |_| | (_| |
+     /_/    \_\__,_|\__,_|_|  \___||___/___/\___|_|\___/ \__,_|\__,_|
+                                                                     
+    Demo for https://github.com/addresscloud/terraform-aws-tile-service presented at FOSS4G 2022 Florence.
+    Our thanks to the folks at MapTiler for providing Open Map Tiler https://openmaptiles.org/ and osm-liberty style used for this non-commercial demo.                                                                                                                                  
+    -->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+      <title>Tile service demo | @addresscloud</title>
+      <script src="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.js"></script>
+      <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet"/>
+      <script src="./osm-liberty.js"></script>
+      <link href="./style.css" rel="stylesheet"/>
+  </head>
+
+  <body>
+      <span id="forkongithub">
+          <a href="https://github.com/addresscloud/terraform-aws-tile-service">Fork me on GitHub</a>
+      </span>
+      <div id="map"></div>
+      <script>
+          var map = new maplibregl.Map({
+              container: 'map',
+              style: style,
+              center: [11.25,43.77],
+              zoom: 13,
+              transformRequest: (url, resourceType) => {
+                  if (url.startsWith('https://f6ett872b6')) {
+                      return {
+                          url,
+                          headers: { 'x-api-key': 'DEMO-KEY-b91ed57f-5438-4d99-a17e-6723610f7ad9' }
+                      }
+                  }
+              }
+          });
+      </script>
+  </body>
+</html>
