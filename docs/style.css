@@ -3,21 +3,15 @@ body {
     padding: 0;
 }
 
-#banner {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-}
-
 #map {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
 }
+
 #forkongithub a {
-    background: #000;
+    background: #e94278;
     color: #fff;
     text-decoration: none;
     font-family: arial, sans-serif;
@@ -31,7 +25,7 @@ body {
 }
 
 #forkongithub a:hover {
-    background: #c11;
+    background: #009cdc;
     color: #fff;
 }
 
@@ -51,7 +45,17 @@ body {
     bottom: 1px;
     top: auto;
 }
-@media screen and (min-width:800px) {
+@media screen and (min-width:200px) {
+    #logo {
+        position: fixed;
+        display: block;
+        bottom: 0;
+        left: 5px;
+        width: 200px;
+        overflow: hidden;
+        z-index: 9999;
+    }
+
     #forkongithub {
         position: fixed;
         display: block;
@@ -73,6 +77,5 @@ body {
         -ms-transform: rotate(45deg);
         -moz-transform: rotate(45deg);
         -o-transform: rotate(45deg);
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
     }
 }

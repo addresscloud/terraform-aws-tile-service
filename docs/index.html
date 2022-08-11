@@ -10,10 +10,11 @@
      /_/    \_\__,_|\__,_|_|  \___||___/___/\___|_|\___/ \__,_|\__,_|
                                                                      
     Demo for https://github.com/addresscloud/terraform-aws-tile-service presented at FOSS4G 2022 Florence.
-    Our thanks to the folks at MapTiler for providing Open Map Tiler https://openmaptiles.org/ and osm-liberty style used for this non-commercial demo.                                                                                                                                  
+    Our thanks to the folks at MapTiler for providing OpenMapTiler https://openmaptiles.org/ and osm-liberty style used for this non-commercial demo.                                                                                                                                  
     -->
       <meta charset="utf-8" />
       <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+      <link rel="icon" href="favicon.png" type="image/png">
       <title>Tile service demo | @addresscloud</title>
       <script src="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.js"></script>
       <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet"/>
@@ -22,12 +23,18 @@
   </head>
 
   <body>
+    <span id="logo">
+     <a href="https://github.com/addresscloud">
+        <img src="https://cdn.addresscloud.com/assets/images/logos/logo-200px.png">
+    </a>
+    </span>
       <span id="forkongithub">
           <a href="https://github.com/addresscloud/terraform-aws-tile-service">Fork me on GitHub</a>
       </span>
       <div id="map"></div>
       <script>
           var map = new maplibregl.Map({
+              attributionControl: false,
               container: 'map',
               style: style,
               center: [11.25,43.77],
@@ -40,7 +47,10 @@
                       }
                   }
               }
-          });
+          }).addControl(new maplibregl.AttributionControl({
+                compact: false,
+                customAttribution: 'OpenMapTiles'
+            }));
       </script>
   </body>
 </html>

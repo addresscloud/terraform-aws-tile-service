@@ -4,7 +4,7 @@
 
 This Terraform module provisions a vector tile service using Amazon API Gateway and S3. API requests are mapped to a cache of vector tiles stored in an S3 bucket. The service is completely serverless.
 
-![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/diagram-v2.png)
+![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v2-no-background.png)
 
 ## Demo
 
