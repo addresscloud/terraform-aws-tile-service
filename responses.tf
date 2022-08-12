@@ -15,7 +15,7 @@ resource "aws_api_gateway_gateway_response" "BAD_REQUEST_BODY" {
   response_type = "BAD_REQUEST_BODY"
   status_code   = "400"
   response_templates = {
-    "application/json" = "{\"message\": \"$context.error.validationErrorString\"}"
+    "application/json" = "{\"message\": $context.error.validationErrorString}"
   }
 
   response_parameters = {
@@ -36,12 +36,25 @@ resource "aws_api_gateway_gateway_response" "BAD_REQUEST_PARAMETERS" {
   }
 }
 
-resource "aws_api_gateway_gateway_response" "MISSING_AUTHENTICATION_TOKEN" {
+resource "aws_api_gateway_gateway_response" "RESOURCE_NOT_FOUND" {
   rest_api_id   = aws_api_gateway_rest_api.tile.id
-  response_type = "MISSING_AUTHENTICATION_TOKEN"
+  response_type = "RESOURCE_NOT_FOUND"
   status_code   = "404"
   response_templates = {
     "application/json" = "{\"message\": \"Not found\"}",
+  }
+
+  response_parameters = {
+    "gatewayresponse.header.access-control-allow-origin" = var.api_access_control_allow_origin
+  }
+}
+
+resource "aws_api_gateway_gateway_response" "MISSING_AUTHENTICATION_TOKEN" {
+  rest_api_id   = aws_api_gateway_rest_api.tile.id
+  response_type = "MISSING_AUTHENTICATION_TOKEN"
+  status_code   = "403"
+  response_templates = {
+    "application/json" = "{\"message\": \"Missing authentication token or unsupported API request\"}",
   }
 
   response_parameters = {
@@ -54,7 +67,7 @@ resource "aws_api_gateway_gateway_response" "DEFAULT_4XX" {
   response_type = "DEFAULT_4XX"
 
   response_templates = {
-    "application/json" = "{\"message\":\"$context.error.messageString\"}"
+    "application/json" = "{\"message\":$context.error.messageString}"
   }
 
   response_parameters = {
@@ -67,7 +80,7 @@ resource "aws_api_gateway_gateway_response" "DEFAULT_5XX" {
   response_type = "DEFAULT_5XX"
 
   response_templates = {
-    "application/json" = "{\"message\":\"$context.error.messageString\"}"
+    "application/json" = "{\"message\":$context.error.messageString}"
   }
 
   response_parameters = {
