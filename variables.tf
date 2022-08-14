@@ -79,8 +79,8 @@ variable "api_throttling_rate_limit" {
   type        = number
 }
 
-variable "s3_bucket_custom_policy" {
+variable "s3_bucket_policy" {
   description = "A customised policy for the S3 bucket to support advanced use cases"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
