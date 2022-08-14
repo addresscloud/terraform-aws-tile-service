@@ -49,6 +49,12 @@ variable "api_deployment_trigger" {
   type        = string
 }
 
+variable "api_tilejson_response_template" {
+  description = "A custom value for the S3 integration response template for the TileJson endpoint. Enables modification of TileJson between S3 and API response."
+  default     = ""
+  type        = string
+}
+
 variable "api_require_api_key" {
   description = "Toggle API Gateway API Key requirement for all endpoints. The API key is passed using the `x-api-key` header. Enable by default, see the examples for key and usage plan configuration."
   default     = true
@@ -71,4 +77,10 @@ variable "api_throttling_rate_limit" {
   description = "API rate limit tps. Maximum limit of transactions per second allowed for this API. Defaults to `500`. Use this setting to prevent the tile service from consuming too many transactions from the AWS account quota."
   default     = 500
   type        = number
+}
+
+variable "s3_bucket_custom_policy" {
+  description = "A customised policy for the S3 bucket to support advanced use cases"
+  default = ""
+  type = string
 }

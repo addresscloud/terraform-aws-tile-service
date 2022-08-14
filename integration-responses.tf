@@ -5,7 +5,7 @@ resource "aws_api_gateway_integration_response" "json_get" {
   status_code = aws_api_gateway_method_response.json_get.status_code
   depends_on  = [aws_api_gateway_method.json_get, aws_api_gateway_integration.json_get]
   response_templates = {
-    "application/json" = ""
+    "application/json" = var.api_tilejson_response_template
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
