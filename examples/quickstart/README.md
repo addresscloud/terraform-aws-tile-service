@@ -1,10 +1,10 @@
 # Quick Start Example
 
-This folder contains an example of Terraform code that uses the apigateway-tile-service module to deploy an API Gateway instance and S3 bucket as a tile server. I'm using the Ordnance Survey [Open Rivers](https://www.ordnancesurvey.co.uk/business-government/products/open-map-rivers) (`oprvrs`) data as an example.
+This folder contains an example of Terraform code that uses the apigateway-tile-service module to deploy an API Gateway instance and S3 bucket as a tile server.
 
 ## Terraform
 
-1. Copy the contents of [main.tf]() into your local Terraform workspace and edit with your `<BUCKET>` and `<REGION>` parameters.
+1. Copy the contents of [main.tf](https://github.com/addresscloud/terraform-aws-tile-service/blob/main/examples/quickstart/main.tf) into your local Terraform workspace and edit with your `<BUCKET>` and `<REGION>` parameters.
 
 1. Run `terraform apply` to create the infrastructure in your AWS account. Note the value of the `api_invoke_url` output value.
 
@@ -16,7 +16,7 @@ Edit the `tiles` attribute of your TileJSON to point to the new API using the `a
     ...
 	"tilejson": "3.0.0",
 	"name": "oprvrs",
-	"tiles": ["<API_INVOKE_URL>/default/v1/oprvrs/20220629/{z}/{x}/{y}"],
+	"tiles": ["API_INVOKE_URL/default/v1/TILESET/VERSION/{z}/{x}/{y}"],
 	"scheme": "zxy",
     ...
 ```
@@ -24,11 +24,11 @@ Edit the `tiles` attribute of your TileJSON to point to the new API using the `a
 Upload your TileJSON and tile cache to the new bucket. 
 
 ```sh
-aws s3 cp tile.json s3://<BUCKET>/oprvrs/tile.json
+aws s3 cp tile.json s3://BUCKET/TILESET/tile.json
 ```
 
 ```sh
-aws s3 cp --recursive cache s3://<BUCKET>/oprvrs/
+aws s3 cp --recursive cache s3://BUCKET/TILESET/VERSION/
 ```
 
 ## API Key
@@ -41,13 +41,13 @@ You should now be able to make requests aginst the API Gateway instance using th
 
 #### **Get TileJSON**
 ```http
-GET <API_INVOKE_URL>/default/v1/{tileset}/
+GET API_INVOKE_URL/default/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
 #### **Get a tile**
 ```http
-GET <API_INVOKE_URL/default/v1/{tileset}/{z}/{x}/{y}
+GET API_INVOKE_URL/default/v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
