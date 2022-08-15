@@ -13,12 +13,10 @@ This folder contains an example of Terraform code that uses the apigateway-tile-
 Edit the `tiles` attribute of your TileJSON to point to the new API using the `api_invoke_url` value. For example:
 
 ```json
-    ...
-	"tilejson": "3.0.0",
-	"name": "oprvrs",
-	"tiles": ["API_INVOKE_URL/default/v1/TILESET/VERSION/{z}/{x}/{y}"],
-	"scheme": "zxy",
-    ...
+"tilejson": "3.0.0",
+"name": "oprvrs",
+"tiles": ["API_INVOKE_URL/default/v1/TILESET/VERSION/{z}/{x}/{y}"],
+"scheme": "zxy",
 ```
 
 Upload your TileJSON and tile cache to the new bucket. 
