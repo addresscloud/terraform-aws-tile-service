@@ -13,11 +13,12 @@ resource "aws_api_gateway_integration_response" "json_get" {
 }
 
 resource "aws_api_gateway_integration_response" "json_get_404" {
-  rest_api_id = aws_api_gateway_rest_api.tile.id
-  resource_id = aws_api_gateway_resource.tileset.id
-  http_method = aws_api_gateway_method.json_get.http_method
-  status_code = 404
-  depends_on  = [aws_api_gateway_method.json_get, aws_api_gateway_integration.json_get]
+  rest_api_id       = aws_api_gateway_rest_api.tile.id
+  resource_id       = aws_api_gateway_resource.tileset.id
+  http_method       = aws_api_gateway_method.json_get.http_method
+  status_code       = 404
+  selection_pattern = "404"
+  depends_on        = [aws_api_gateway_method.json_get, aws_api_gateway_integration.json_get]
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
@@ -61,11 +62,12 @@ resource "aws_api_gateway_integration_response" "tile_get" {
 }
 
 resource "aws_api_gateway_integration_response" "tile_get_403" {
-  rest_api_id = aws_api_gateway_rest_api.tile.id
-  resource_id = aws_api_gateway_resource.y.id
-  http_method = aws_api_gateway_method.tile_get.http_method
-  status_code = aws_api_gateway_method_response.tile_get.status_code
-  depends_on  = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get]
+  rest_api_id       = aws_api_gateway_rest_api.tile.id
+  resource_id       = aws_api_gateway_resource.y.id
+  http_method       = aws_api_gateway_method.tile_get.http_method
+  status_code       = 403
+  selection_pattern = "403"
+  depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get]
   response_templates = {
     "application/json" = "{\"message\":\"Forbidden\"}"
   }
@@ -76,11 +78,12 @@ resource "aws_api_gateway_integration_response" "tile_get_403" {
 }
 
 resource "aws_api_gateway_integration_response" "tile_get_404" {
-  rest_api_id = aws_api_gateway_rest_api.tile.id
-  resource_id = aws_api_gateway_resource.y.id
-  http_method = aws_api_gateway_method.tile_get.http_method
-  status_code = aws_api_gateway_method_response.tile_get.status_code
-  depends_on  = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get]
+  rest_api_id       = aws_api_gateway_rest_api.tile.id
+  resource_id       = aws_api_gateway_resource.y.id
+  http_method       = aws_api_gateway_method.tile_get.http_method
+  status_code       = 404
+  selection_pattern = "404"
+  depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get]
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
