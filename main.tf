@@ -46,5 +46,5 @@ resource "aws_s3_bucket_public_access_block" "tile" {
 resource "aws_api_gateway_rest_api" "tile" {
   name               = "tile"
   description        = "Tile service"
-  binary_media_types = ["*/*"]
+  binary_media_types = ["application/x-protobuf"]
 }
