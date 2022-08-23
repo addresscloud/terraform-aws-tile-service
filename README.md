@@ -8,7 +8,7 @@ This Terraform module provisions a vector tile service using Amazon API Gateway 
 
 ## Demo
 
-https://addresscloud.github.io/terraform-aws-tile-service/
+https://addresscloud.github.io/terraform-aws-tile-service
 
 ## Usage
 
@@ -36,7 +36,7 @@ output "api_invoke_url" {
 
 * protocol buffers (`.pbf`)
 * gzip content encoding
-* [slippy map tilenames specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
+* slippy map tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
 
 Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
 
@@ -73,24 +73,31 @@ The API exposes two endpoints:
 
 #### **Get TileJSON**
 ```http
-GET /{api_invoke_url}/v1/{tileset}/
+GET /{APPI_INVOKE_URL}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
 #### **Get a tile**
 ```http
-GET /{api_invoke_url}/v1/{tileset}/{z}/{x}/{y}
+GET /{API_INVOKE_URL}/v1/{tileset}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
 Both endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer) for an example of custom header configuration.
 
-The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/api-key](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key) demonstrates creation of an API key and usage plan using Terraform for use with the API. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
-
+The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/api-key](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key) demonstrates creation of an API key and usage plan. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
 
 ### Version Path
 
 The module includes a `v1` in the path to future proof against breaking changes to the API.
+
+## Examples
+
+- [api key configuration](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key)
+- [caching](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/caching)
+- [custom domain name](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/custom-domain)
+- [deployment trigger](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/deployment-trigger)
+- [lambda authorization](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer)
 
 ## About
 
@@ -108,23 +115,14 @@ These alternatives influenced the design of this module should be considered if 
 - [TiTiler](https://github.com/developmentseed/titiler) supports multiple data types including rasters using Lambda functions
 - [MapTiler Cloud](https://www.maptiler.com/cloud/) excellent commercial solution when self-hosting is not required
 
-## Examples
-
-- [api key configuration](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key)
-- [caching](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/caching)
-- [custom domain name](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/custom-domain)
-- [deployment trigger](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/deployment-trigger)
-- [lambda authorization](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer)
-
-
-## Maintainers
+### Maintainers
 
 [@tomasholderness](https://github.com/tomasholderness)
 
-## Contributing
+### Contributing
 
 PRs accepted.
 
-## License
+### License
 
 MIT © 2022 Addresscloud Limited

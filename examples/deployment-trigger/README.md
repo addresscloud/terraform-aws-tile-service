@@ -4,9 +4,9 @@ Changes to API Gateway must be followed by an API deployment for them to be refl
 
 ## Hardcoded Parameter
 
-Useful for manual control of deployments. The value must be changed to trigger deployments. 
+Useful for manual control of deployments. The value "version 1.2.3" must be changed to trigger deployments. 
 
-```terraform
+```hcl
 module "tile" {
   source                 = "addresscloud/apigateway-tile-service/aws"
   api_name               = "tile-service"
@@ -18,9 +18,9 @@ module "tile" {
 
 ## File Hash
 
-This approach avoids hardcoding a value, but only trigggers a build when the relevant Terraform file has been changed. A complete worked example is included in [main.tf](main.tf)
+This approach avoids hardcoding a value and only trigggers a build when the main Terraform file has been changed.
 
-```terraform
+```hcl
 module "tile" {
   source                 = "addresscloud/apigateway-tile-service/aws"
   api_name               = "tile-service"

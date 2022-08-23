@@ -1,6 +1,6 @@
 # Custom Domain Name Example
 
-Custom domain names can be configured outside the module, following the [Terraform instructions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_domain_name).
+Custom domain names can be configured outside the module following the [Terraform instructions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_domain_name).
 
 ```hcl
 module "tile" {
@@ -8,7 +8,6 @@ module "tile" {
   api_name               = "tile-service"
   api_region             = var.region
   s3_bucket_name         = var.bucket
-  api_deployment_trigger = "version 1.2.3"
 }
 ```
 
@@ -16,8 +15,8 @@ module "tile" {
 
 ```hcl
 resource "aws_api_gateway_domain_name" "tile" {
-  certificate_arn = "<CERTIFICATE_ARN>"
-  domain_name     = "<DOMAIN_NAME>"
+  certificate_arn = "YOUR_CERTIFICATE_ARN"
+  domain_name     = "YOUR_DOMAIN_NAME"
 }
 ```
 

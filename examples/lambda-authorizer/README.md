@@ -4,9 +4,9 @@ API Gateway supports Lambda authorizer functions to control access to the tile s
 
 ## Lambda Authorizer Setup
 
-This example uses the `data` block to reference an existing function in the same account and region as the tile API Gateway instance. The `identity_source` parameter sets the header value to be used. An `aws_lambda_permission` block is used to grant API Gateway permission to execute the function.
+This example uses the `data` block to reference an existing function in the same account and region as the tile API Gateway instance. The `identity_source` parameter sets the header parameter ("x-secret-value") to be used by the authorizer. An `aws_lambda_permission` block is used to grant API Gateway permission to execute the function.
 
-```terraform
+```hcl
 data "aws_lambda_function" "authorizer" {
   function_name = "demoCustomAuthorizer"
 }
@@ -32,7 +32,7 @@ resource "aws_lambda_permission" "demoAuth" {
 
 Once the authorizer and permissions have been confgured, the module can be set to include the additional header for the identity source and the access control origin set to a specific domain to restrict cross-site access.
 
-```terraform
+```hcl
 module "tile" {
   source                           = "addresscloud/tile-service/aws"
   api_custom_authorizer_arn        = aws_api_gateway_authorizer.demoAuth.id
@@ -40,7 +40,7 @@ module "tile" {
   api_region                       = var.region
   s3_bucket_name                   = var.bucket
   api_access_control_allow_headers = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,x-amz-meta-fileinfo,x-secret-value'"
-  api_access_control_origin        = "'<DOMAIN>'"
+  api_access_control_origin        = "'YOUR_DOMAIN'"
 }
 
 output "api_invoke_url" {

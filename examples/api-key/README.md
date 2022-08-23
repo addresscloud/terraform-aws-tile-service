@@ -1,34 +1,18 @@
 # API Key Example
 
-This example demonstrates configuration of an API key and usage plan for use with the module. By default the module requires an API key to access all endpoints (configurable with the `api_require_api_key` parameter). Because API key management and usage plan configuration is user specific the module does not create these automatically but instead lets the user manage these outside the module (as shown in here). This example also demonstrates setting the stage name to a custom variable ("dev") instead of the default value ("default") which can be useful when working with different environments.
+This example demonstrates configuration of an API key and usage plan for use with the module. By default the module requires an API key to access all endpoints (configurable with the `api_require_api_key` parameter). Because API key management and usage plan configuration is user specific the module does not create these automatically but instead lets the user manage these outside the module. This example also demonstrates setting the stage name to a custom variable ("dev") instead of the default value ("default") which can be useful when working with different environments.
 
 ## Terraform 
 
 The Terraform code in [main.tf](main.tf) creates a usage plan "dev" and an API key "developer-api-key" and links them to the tile API. The output `dev_api_key` is the value that can be included in the `x-api-key` header as shown in the MapLibre section below.
 
 ```hcl
-terraform {
-  backend "local" {}
-}
-
-variable "region" {
-  description = "Your AWS region."
-}
-
-variable "bucket" {
-  description = "Your S3 bucket name."
-}
-
-provider "aws" {
-  region = var.region
-}
-
 module "tile" {
   source         = "addresscloud/apigateway-tile-service/aws"
   api_name       = "tile-service"
-  api_region     = var.region
+  api_region     = "YOUR_REGION""
   api_stage_name = "dev"
-  s3_bucket_name = var.bucket
+  s3_bucket_name = "YOUR_BUCKET_NAME"
 }
 
 resource "aws_api_gateway_usage_plan" "dev" {
