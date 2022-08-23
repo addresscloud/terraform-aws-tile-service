@@ -4,54 +4,31 @@
 
 This Terraform module provisions a vector tile service using Amazon API Gateway and S3. API requests are mapped to a cache of vector tiles stored in an S3 bucket. The service is completely serverless.
 
-![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v2-no-background.png)
+![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v2.png)
 
 ## Demo
 
 https://addresscloud.github.io/terraform-aws-tile-service/
 
-## Table of Contents
+## Usage
 
-- [About](#about)
-- [Install](#install)
-- [API](#API)
-- [Additional Options](#additional-options)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
+Create S3 bucket and API gateway instance.
 
-## About
-
-The module uses Amazon API Gateway and S3 to provision a vector tile API suitable for modern mapping libraries such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/).
-
-API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that the service is highly-scaleable.
-
-This module is maintained by [Addresscloud](https://github.com/addresscloud/).
-
-### Alternatives
-
-These alternatives influenced the design of this module should be considered if API Gateway features are not needed.
-
-- [CloudFront + S3](https://github.com/addresscloud/serverless-tiles) the cheapest way to self-host tiles
-- [TiTiler](https://github.com/developmentseed/titiler) supports multiple data types including rasters using Lambda functions
-- [MapTiler Cloud](https://www.maptiler.com/cloud/) excellent commercial solution when self-hosting is not required
-
-## Install
-
-Create a Terraform configuration that initialises the module and specifies the values of the variables as shown below. This will create a new S3 bucket and API Gateway instance. For further details see [examples/quickstart](examples/quickstart).
-
-### Terraform
-
-```terraform
+```hcl
 provider "aws" {
-  region  = "<REGION>"
+  region  = "YOUR_REGION"
 }
 
 module "tile" {
   source            = "addresscloud/tile-service/aws"
   api_name          = "tile-service"
-  api_region        = "<REGION>"
-  s3_bucket_name    = "<NEW_BUCKET_NAME>"
+  api_region        = "YOUR_REGION"
+  s3_bucket_name    = "YOUR_NEW_BUCKET_NAME"
+}
+
+output "api_invoke_url" {
+  description = "Output the invoke URL once the API is deployed."
+  value       = module.tile.api_invoke_url
 }
 ```
 
@@ -68,7 +45,7 @@ Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github
 Tiles should be stored in the bucket using the layout below.
 
 ```
-<NEW_BUCKET_NAME>/
+YOUR_NEW_BUCKET_NAME/
   {tileset}/
     tile.json
     {version}/
@@ -76,7 +53,7 @@ Tiles should be stored in the bucket using the layout below.
         {x}/
           {y}.pbf
 ```
-* Where `<NEW_BUCKET_NAME>` is the bucket defined in the `s3_bucket_name` variable.
+* Where `YOUR_NEW_BUCKET_NAME` is the bucket defined in the `s3_bucket_name` variable.
 
 * The `tileset` is a directory with any unique URI-safe alphanumeric name to identify individual tile sets.
 
@@ -87,16 +64,14 @@ Tiles should be stored in the bucket using the layout below.
 Example complete S3 tile path:
 
 ```
-s3://<NEW_BUCKET_NAME>/oprvrs/2022-04-01/0/494/347.pbf
+s3://YOUR_NEW_BUCKET_NAME/oprvrs/2022-04-01/0/494/347.pbf
 ```
 
 ### Outputs
 
 The module outputs the variable `api_invoke_url` which is the public URL for the API. 
 
-## API
-
-### Endpoints
+### API
 
 This module exposes two endpoints:
 
@@ -114,13 +89,25 @@ X-Api-Key: {API_KEY}
 
 Both endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](examples/lambda-authorizer) for a header configuration example.
 
-### Example MapLibre Implementation
-
-See [examples/quickstart](examples/quickstart).
-
 ### Version Path
 
 The module includes a `v1` in the path to future proof against breaking changes to the API.
+
+## About
+
+The module uses Amazon API Gateway and S3 to provision a vector tile API suitable for modern mapping libraries such as [MapLibre](https://maplibre.org/) and [Mapbox](https://www.mapbox.com/).
+
+API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that the service is highly-scaleable.
+
+This module is maintained by [Addresscloud](https://github.com/addresscloud/).
+
+### Alternatives
+
+These alternatives influenced the design of this module should be considered if API Gateway features are not needed.
+
+- [CloudFront + S3](https://github.com/addresscloud/serverless-tiles) the cheapest way to self-host tiles
+- [TiTiler](https://github.com/developmentseed/titiler) supports multiple data types including rasters using Lambda functions
+- [MapTiler Cloud](https://www.maptiler.com/cloud/) excellent commercial solution when self-hosting is not required
 
 ## Additional Options
 
