@@ -8,7 +8,8 @@ This Terraform module provisions a vector tile service using Amazon API Gateway 
 
 ## Demo
 
-https://addresscloud.github.io/terraform-aws-tile-service
+- [Live demo](https://addresscloud.github.io/terraform-aws-tile-service) 
+- [FOSS4G 2022 slides](https://addresscloud.github.io/terraform-aws-tile-service/decks/foss4g-20220825.pdf)
 
 ## Usage
 
