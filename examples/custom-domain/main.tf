@@ -1,5 +1,5 @@
 terraform {
-    backend "local" {}
+  backend "local" {}
 }
 
 variable "region" {
@@ -11,22 +11,22 @@ variable "bucket" {
 }
 
 variable "certificate_arn" {
-    description = "Route53 / DNS certificate ARN."
+  description = "Route53 / DNS certificate ARN."
 }
 
 variable "domain_name" {
-    description = "Custom domain name."
+  description = "Custom domain name."
 }
 
 provider "aws" {
   region = var.region
-} 
+}
 
 module "tile" {
-  source                 = "addresscloud/apigateway-tile-service/aws"
-  api_name               = "tile-service"
-  api_region             = var.region
-  s3_bucket_name         = var.bucket
+  source         = "addresscloud/apigateway-tile-service/aws"
+  api_name       = "tile-service"
+  api_region     = var.region
+  s3_bucket_name = var.bucket
 }
 
 resource "aws_api_gateway_domain_name" "tile" {
