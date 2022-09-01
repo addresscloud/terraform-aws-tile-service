@@ -9,7 +9,7 @@ const style = JSON.parse(`{
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://f6ett872b6.execute-api.eu-west-1.amazonaws.com/default/v1/opmosm/"
+      "url": "https://f6ett872b6.execute-api.eu-west-1.amazonaws.com/default/v1/tileset/opmosm/"
     }
   },
   "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
