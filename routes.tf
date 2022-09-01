@@ -46,8 +46,20 @@ resource "aws_api_gateway_resource" "tilefile_path" {
   path_part   = "tilefile"
 }
 
-resource "aws_api_gateway_resource" "filekey" {
+resource "aws_api_gateway_resource" "tilefile" {
   rest_api_id = aws_api_gateway_rest_api.tile.id
   parent_id   = aws_api_gateway_resource.tilefile_path.id
+  path_part   = "{tilefile}"
+}
+
+resource "aws_api_gateway_resource" "tilefile_version" {
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  parent_id   = aws_api_gateway_resource.tilefile.id
+  path_part   = "{version}"
+}
+
+resource "aws_api_gateway_resource" "filekey" {
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  parent_id   = aws_api_gateway_resource.tilefile_version.id
   path_part   = "{filekey}"
 }
