@@ -37,7 +37,7 @@ resource "aws_api_gateway_integration" "tile_get" {
   type                    = "AWS"
   integration_http_method = "GET"
   credentials             = aws_iam_role.tile.arn
-  uri                     = "arn:aws:apigateway:${var.api_region}:s3:path/${var.s3_bucket_name}/{tileset}/{version}/{z}/{x}/{y}.pbf"
+  uri                     = "arn:aws:apigateway:${var.api_region}:s3:path/${var.s3_bucket_name}/{tileset}/{version}/{z}/{x}/{y}"
   request_parameters = {
     "integration.request.path.tileset" = "method.request.path.tileset"
     "integration.request.path.version" = "method.request.path.version"
