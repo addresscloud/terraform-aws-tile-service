@@ -2,13 +2,20 @@
 
 [![Validate](https://github.com/addresscloud/terraform-aws-tile-service/actions/workflows/validate.yml/badge.svg)](https://github.com/addresscloud/terraform-aws-tile-service/actions/workflows/validate.yml)
 
-This Terraform module provisions a vector tile service using Amazon API Gateway and S3. API requests are mapped to a cache of vector tiles stored in an S3 bucket. The service is completely serverless.
+This Terraform module provisions a tile service using Amazon API Gateway and S3. The service supports requests against tilesets using the slippy map tiles convention and single-file "tilefile" archives like COGs and PMTiles using range requets. The service is completely serverless.
 
 ![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v2.png)
 
-## Demo
+## Demos
+
+- [MapLibre with vector tiles]()
+- [MapLibre with PMTiles]()
+- [Geotiff.js with COGs]()
+- [Leaflet with raster tiles]()
 
 - [Live demo](https://addresscloud.github.io/terraform-aws-tile-service) 
+
+## Talks
 - [FOSS4G 2022 slides](https://addresscloud.github.io/terraform-aws-tile-service/decks/foss4g-20220825.pdf)
 
 ## Usage
@@ -33,8 +40,9 @@ output "api_invoke_url" {
 }
 ```
 
-### Vector Tile Requirements
+### Tileset Requirements
 
+TODO
 * protocol buffers (`.pbf`)
 * gzip content encoding
 * slippy map tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
@@ -52,25 +60,39 @@ YOUR_NEW_BUCKET_NAME/
     {version}/
       {z}/
         {x}/
-          {y}.pbf
+          {y}
+  {tilefile}/
+    {version}/
+      {file.extension}
 ```
 * Where `YOUR_NEW_BUCKET_NAME` is the bucket defined in the `s3_bucket_name` variable.
 
-* The `tileset` is a directory with any unique URI-safe alphanumeric name to identify individual tile sets.
+* The `tileset` is a directory name with any unique URI-safe alphanumeric name to identify individual tilesets.
 
 * The `version` is a directory with any unique URI-safe alphanumeric name to differentiate versions of the tile set. For example `2022-06-28`.
 
 * The `tile.json` file should be a [TileJSON](https://github.com/mapbox/tilejson-spec) file describing the tileset and with the `tiles` attribute pointing to the newly created API Gateway instance.
 
-Example complete S3 tile path:
+* The `tilefile` is a directory name with any unique URI-safe alphanumeric name to identify individual tilefiles.
+
+* The `file.extension` file should be a single-archive tilefile that supports range requests.
+
+Example complete S3 tileset path:
 
 ```
 s3://YOUR_NEW_BUCKET_NAME/oprvrs/2022-04-01/0/494/347.pbf
 ```
 
+Example complete S3 tilefile path:
+
+```
+s3://YOUR_NEW_BUCKET_NAME/opmosm/2022-04-01/florence.tif
+```
+
+
 ### API
 
-The API exposes two endpoints:
+The API exposes the following endpoints:
 
 #### **Get TileJSON**
 ```http
@@ -78,13 +100,20 @@ GET /{APPI_INVOKE_URL}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
-#### **Get a tile**
+#### **Get a tileset tile**
 ```http
-GET /{API_INVOKE_URL}/v1/{tileset}/{z}/{x}/{y}
+GET /{API_INVOKE_URL}/v1/{tileset}/{version}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
-Both endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer) for an example of custom header configuration.
+#### **Get tilefile tile**
+```http
+GET /{API_INVOKE_URL}/v1/{tilefile}/{version}/{file.extension}
+X-Api-Key: {API_KEY}
+Range: 0-255
+```
+
+All endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer) for an example of custom header configuration.
 
 The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/api-key](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key) demonstrates creation of an API key and usage plan. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
 
