@@ -57,7 +57,7 @@ resource "aws_api_gateway_integration_response" "tile_get" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
     #"method.response.header.Content-Type"                = "'application/x-protobuf'"
-    #"method.response.header.Content-Encoding"            = "'gzip'"
+    "method.response.header.Content-Encoding"            = "'gzip'"
   }
 }
 
