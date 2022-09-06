@@ -60,10 +60,10 @@ resource "aws_api_gateway_method" "filekey_get" {
   authorizer_id    = var.api_custom_authorizer_arn != "" ? var.api_custom_authorizer_arn : null
   api_key_required = var.api_require_api_key
   request_parameters = {
-    "method.request.header.range" = true
+    "method.request.header.range"  = true
     "method.request.path.tilefile" = true
-    "method.request.path.version" = true
-    "method.request.path.filekey" = true 
+    "method.request.path.version"  = true
+    "method.request.path.filekey"  = true
   }
 }
 
@@ -74,9 +74,9 @@ resource "aws_api_gateway_method" "filekey_options" {
   authorization    = "NONE"
   api_key_required = false
   request_parameters = {
-    "method.request.header.range" = true
+    "method.request.header.range"  = true
     "method.request.path.tilefile" = true
-    "method.request.path.version" = true
-    "method.request.path.filekey" = true
+    "method.request.path.version"  = true
+    "method.request.path.filekey"  = true
   }
 }
