@@ -69,6 +69,7 @@ resource "aws_api_gateway_integration_response" "tile_get_404" {
   status_code       = 404
   selection_pattern = "404"
   depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get]
+  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
@@ -118,6 +119,7 @@ resource "aws_api_gateway_integration_response" "filekey_get_404" {
   status_code       = 404
   selection_pattern = "404"
   depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get]
+  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
