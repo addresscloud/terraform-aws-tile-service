@@ -13,7 +13,7 @@ This Terraform module provisions a tile service using Amazon API Gateway and S3.
 * [API](#api)
 * [Client Demos](#client-demos)
 * [Configuration Examples](#configuration-examples)
-* About
+* [About](#about)
 
 ## Install
 
