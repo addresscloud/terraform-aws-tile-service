@@ -1,4 +1,4 @@
-const style2 = JSON.parse(`{
+const style = JSON.parse(`{
   "tileJson": "3.0.0",
   "version": 8,
   "name": "OSM Liberty",
