@@ -5,7 +5,7 @@ const style = JSON.parse(`{
   "sources": {
     "sentinel": {
       "type": "raster",
-      "url": "https://tile-demo.addresscloud.com/v1/tileset/snt2l2/"
+      "url": "https://tile-demo.addresscloud.com/v1/tileset/esas2b/"
     }
   },
   "layers": [
