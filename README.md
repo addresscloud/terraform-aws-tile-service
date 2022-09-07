@@ -2,25 +2,22 @@
 
 [![Validate](https://github.com/addresscloud/terraform-aws-tile-service/actions/workflows/validate.yml/badge.svg)](https://github.com/addresscloud/terraform-aws-tile-service/actions/workflows/validate.yml)
 
-This Terraform module provisions a tile service using Amazon API Gateway and S3. The service supports requests against tilesets using the slippy map tiles convention and single-file "tilefile" archives like COGs and PMTiles using range requets. The service is completely serverless.
+This Terraform module provisions a tile service using Amazon API Gateway and S3. The service supports requests against tilesets using the slippy map tiles specification and single-file "tilefile" archives like COGs and PMTiles using range requets. The service is completely serverless.
 
 ![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v2.png)
 
-## Demos
+## Table of Contents
 
-- [MapLibre with vector tiles]()
-- [MapLibre with PMTiles]()
-- [Geotiff.js with COGs]()
-- [Leaflet with raster tiles]()
+* [Install](#install)
+* [Data Requirements](#data-requirements)
+* [API](#api)
+* [Client Demos](#client-demos)
+* [Configuration Examples](#configuration-examples)
+* About
 
-- [Live demo](https://addresscloud.github.io/terraform-aws-tile-service) 
+## Install
 
-## Talks
-- [FOSS4G 2022 slides](https://addresscloud.github.io/terraform-aws-tile-service/decks/foss4g-20220825.pdf)
-
-## Usage
-
-Create S3 bucket and API gateway instance.
+Configure a Terraform configuration to setup the module.
 
 ```hcl
 provider "aws" {
@@ -40,16 +37,22 @@ output "api_invoke_url" {
 }
 ```
 
-### Tileset Requirements
+Run the configuration to create the S3 bucket and API gateway.
 
-TODO
-* protocol buffers (`.pbf`)
-* gzip content encoding
-* slippy map tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
+```shell
+terraform init
+terraform apply
+```
 
-Both [mb-util](https://github.com/mapbox/mbutil) and [tippecanoe](https://github.com/mapbox/tippecanoe) can create tile caches in this format.
+## Data Requirements
 
-### Bucket layout
+### Tilesets and Tilefiles
+
+The module supports both raster and vector [tilesets](https://docs.mapbox.com/help/glossary/tileset/) using the slippy map tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames). [TileJSON](https://github.com/mapbox/tilejson-spec) files are also supported using the convention `tile.json` and placed in the root of the tileset (see [Bucket Layout](#bucket-layout)).
+
+The module supports both raster and vector tilefiles that support querying of internal tiling using HTTP range requests such as [Cloud Optimised Geotiffs](https://www.cogeo.org/) and [PMTiles](https://github.com/protomaps/PMTiles). Examples of both tilesets and tilefiles are included in [Client Demos](#client-demos).
+
+### Bucket Layout
 
 Tiles should be stored in the bucket using the layout below.
 
@@ -89,6 +92,15 @@ Example complete S3 tilefile path:
 s3://YOUR_NEW_BUCKET_NAME/opmosm/2022-04-01/florence.tif
 ```
 
+### Content Encoding
+
+The module can support compressed tiles if the content-encoding metadata is appended to files in the S3 bucket during upload. Additionally the content-type header can also be set if required by client application. Note that on-the-fly compression by API Gateway is not currently supported.
+
+For example when uploading a vector tileset with gzip compression: 
+
+```shell
+aws s3 cp --recursive my-tile-set/ s3://YOUR_NEW_BUCKET_NAME/TILESET/VERSION/ --content-encoding gzip --content-type application/x-protobuf
+```
 
 ### API
 
@@ -121,6 +133,15 @@ The module automatically requires an API Gateway API key to be present in all re
 
 The module includes a `v1` in the path to future proof against breaking changes to the API.
 
+## Client Demos
+
+|Demo|Source|API Endpoint|Client|Data Format|Data Source|
+|----|------|------------|------|-----------|-----------|
+|Vector tileset|<>|/tileset|MapLibre|Compressed protocol-buffers (.pbf)|OpenMapTiler|
+|Raster tileset|<>|/tileset|MapLibre|Portable network graphic (.png)|Sentinel/ESA|
+|PMTile|<>|/tilefile|MapLibre + PMTile plugin|PMTile|OpenMapTiler|
+|COG|<>|/tilefile|Geotiff.js|Cloud Optimised GeoTiff|<>|
+
 ## Examples
 
 - [api key configuration](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key)
@@ -135,7 +156,8 @@ The module uses Amazon API Gateway and S3 to provision a vector tile API suitabl
 
 API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that the service is highly-scaleable.
 
-This module is maintained by [Addresscloud](https://github.com/addresscloud/).
+## Presentations
+- [FOSS4G 2022 slides](https://addresscloud.github.io/terraform-aws-tile-service/decks/foss4g-20220825.pdf)
 
 ### Alternatives
 
@@ -147,7 +169,7 @@ These alternatives influenced the design of this module should be considered if 
 
 ### Maintainers
 
-[@tomasholderness](https://github.com/tomasholderness)
+This module is maintained by [Addresscloud](https://github.com/addresscloud/).
 
 ### Contributing
 
