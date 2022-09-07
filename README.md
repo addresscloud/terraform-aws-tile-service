@@ -17,7 +17,7 @@ This Terraform module provisions a tile service using Amazon API Gateway and S3.
 
 ## Install
 
-Configure a Terraform configuration to setup the module.
+Create a Terraform configuration to setup the module.
 
 ```hcl
 provider "aws" {
@@ -48,9 +48,9 @@ terraform apply
 
 ### Tilesets and Tilefiles
 
-The module supports both raster and vector [tilesets](https://docs.mapbox.com/help/glossary/tileset/) using the slippy map tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames). [TileJSON](https://github.com/mapbox/tilejson-spec) files are also supported using the convention `tile.json` and placed in the root of the tileset (see [Bucket Layout](#bucket-layout)).
+The module supports raster and vector [tilesets](https://docs.mapbox.com/help/glossary/tileset/) using the slippy map tilenames [specification](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames). [TileJSON](https://github.com/mapbox/tilejson-spec) files are also supported using the convention `tile.json` and placed in the root of the tileset (see [Bucket Layout](#bucket-layout)).
 
-The module supports both raster and vector tilefiles that support querying of internal tiling using HTTP range requests such as [Cloud Optimised Geotiffs](https://www.cogeo.org/) and [PMTiles](https://github.com/protomaps/PMTiles). Examples of both tilesets and tilefiles are included in [Client Demos](#client-demos).
+The module supports querying raster and vector tilefiles using HTTP range requests. Examples that have been tested are [Cloud Optimised Geotiffs](https://www.cogeo.org/) and [PMTiles](https://github.com/protomaps/PMTiles), examples of both are included in the [Client Demos](#client-demos).
 
 ### Bucket Layout
 
