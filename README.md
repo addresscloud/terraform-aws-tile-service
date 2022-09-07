@@ -63,7 +63,7 @@ YOUR_NEW_BUCKET_NAME/
     {version}/
       {z}/
         {x}/
-          {y}
+          {y.extension}
   {tilefile}/
     {version}/
       {file.extension}
@@ -110,7 +110,7 @@ The API exposes the following endpoints:
 
 #### **Get TileJSON**
 ```http
-GET /{APPI_INVOKE_URL}/v1/{tileset}/
+GET /{APP_INVOKE_URL}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
