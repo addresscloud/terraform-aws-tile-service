@@ -153,9 +153,9 @@ The module includes a `v1` in the path to future proof against breaking changes 
 
 |Demo|Source|API Endpoint|Client|Data Format|Data Source|
 |----|------|------------|------|-----------|-----------|
-|[Vector tileset](https://addresscloud.github.io/terraform-aws-tile-service/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/index.html)|/tileset|MapLibre|Compressed protocol-buffers (.pbf)|OpenMapTiler|
+|[Vector tileset](https://addresscloud.github.io/terraform-aws-tile-service/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/index.html)|/tileset|MapLibre|Compressed protocol-buffers (.pbf)|OpenMapTiles|
 |Raster tileset|<>|/tileset|MapLibre|Portable network graphic (.png)|Sentinel/ESA|
-|PMTile|<>|/tilefile|MapLibre + PMTile plugin|PMTile|OpenMapTiler|
+|PMTile|<>|/tilefile|MapLibre + PMTile plugin|PMTile|OpenMapTiles|
 |COG|<>|/tilefile|Geotiff.js|Cloud Optimised GeoTiff|<>|
 
 ## Configuration Examples
