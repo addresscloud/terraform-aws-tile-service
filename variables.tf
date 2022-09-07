@@ -21,7 +21,7 @@ variable "api_access_control_allow_origin" {
 
 variable "api_access_control_allow_headers" {
   description = "List of Access-Control-Allow-Headers header values to be added to OPTIONS responses. Values must be comma separated and the list enclosed in single quotes."
-  default     = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,x-amz-meta-fileinfo'"
+  default     = "'Content-Type,Range,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Meta-Fileinfo'"
   type        = string
 }
 
