@@ -124,12 +124,13 @@ GET /{API_INVOKE_URL}/v1/{tilefile}/{version}/{file.extension}
 X-Api-Key: {API_KEY}
 Range: 0-255
 ```
-
+#### CORS
 All endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer) for an example of custom header configuration.
 
+#### API Key
 The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/api-key](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key) demonstrates creation of an API key and usage plan. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
 
-### Version Path
+#### Version Path
 
 The module includes a `v1` in the path to future proof against breaking changes to the API.
 
@@ -142,7 +143,7 @@ The module includes a `v1` in the path to future proof against breaking changes 
 |PMTile|<>|/tilefile|MapLibre + PMTile plugin|PMTile|OpenMapTiler|
 |COG|<>|/tilefile|Geotiff.js|Cloud Optimised GeoTiff|<>|
 
-## Examples
+## Configuration Examples
 
 - [api key configuration](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key)
 - [caching](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/caching)
