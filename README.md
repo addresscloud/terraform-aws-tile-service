@@ -4,7 +4,7 @@
 
 This Terraform module provisions a tile service using Amazon API Gateway and S3. The service supports requests against tilesets using the slippy map tiles specification and single-file "tilefile" archives like COGs and PMTiles using range requets. The service is completely serverless.
 
-![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v2.png)
+![Service diagram](https://github.com/addresscloud/terraform-aws-tile-service/raw/main/_img/diagram-v3.png)
 
 ## Table of Contents
 
