@@ -102,6 +102,8 @@ For example when uploading a vector tileset with gzip compression:
 aws s3 cp --recursive my-tile-set/ s3://YOUR_NEW_BUCKET_NAME/TILESET/VERSION/ --content-encoding gzip --content-type application/x-protobuf
 ```
 
+Subsequent API requests for these tiles will return `Content-encoding` and `Content-type` response headers. 
+
 ### API
 
 The API exposes the following endpoints:
@@ -124,11 +126,24 @@ GET /{API_INVOKE_URL}/v1/{tilefile}/{version}/{file.extension}
 X-Api-Key: {API_KEY}
 Range: 0-255
 ```
+
+#### Maximum Payload Size
+
+Note that the maximum payload size for API Gateway is [10 MB](https://docs.aws.amazon.com/apigateway/latest/developerguide/limits.html#api-gateway-execution-service-limits-table). Requesting tiles larger than this will return a 500 error.
+
 #### CORS
 All endpoints support `OPTIONS` requests for CORS. See [examples/lambda-authorizer](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer) for an example of custom header configuration.
 
 #### API Key
 The module automatically requires an API Gateway API key to be present in all requests using the `X-API-KEY` header. The example in [examples/api-key](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/api-key) demonstrates creation of an API key and usage plan. Alternatively the API key requirement can be completely disabled by setting the `api_require_api_key` variable to `false`. Note that this may expose an API to public access.
+
+#### Errors
+
+The following error types are supported:
+
+* 404 - not found (missing file/tile)
+* 403 - forbidden (failed authorization)
+* 500 - internal server error (all other errors)
 
 #### Version Path
 
