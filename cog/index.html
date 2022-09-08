@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+                  _     _                        _                 _ 
+         /\      | |   | |                      | |               | |
+        /  \   __| | __| |_ __ ___  ___ ___  ___| | ___  _   _  __| |
+       / /\ \ / _` |/ _` | '__/ _ \/ __/ __|/ __| |/ _ \| | | |/ _` |
+      / ____ \ (_| | (_| | | |  __/\__ \__ \ (__| | (_) | |_| | (_| |
+     /_/    \_\__,_|\__,_|_|  \___||___/___/\___|_|\___/ \__,_|\__,_|
+                                                                     
+    Demo for https://github.com/addresscloud/terraform-aws-tile-service COG tiles                                                                                                                               
+    -->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+      <link rel="icon" href="../common/favicon.png" type="image/png">
+      <title>Tile service demo | @addresscloud</title>
+      <script src="https://cdn.jsdelivr.net/npm/geotiff"></script>
+      <script src="./plotty.js"></script>
+      <link href="../common/style.css" rel="stylesheet"/>
+  </head>
+
+  <body>
+    <span id="logo">
+     <a href="https://github.com/addresscloud">
+        <img src="https://cdn.addresscloud.com/assets/images/logos/logo-200px.png">
+    </a>
+    </span>
+      <span id="forkongithub">
+          <a href="https://github.com/addresscloud/terraform-aws-tile-service">Fork me on GitHub</a>
+      </span>
+      <p id="status">loading...</p>
+      <canvas id="plot">
+      </canvas>
+      <script>
+            (async function() {
+                const tiff = await GeoTIFF.fromUrl("https://tile-demo.addresscloud.com/v1/tilefile/esas2b/20220907/florence-sentinel.tif",{headers:{"x-api-key": "DEMO-KEY-b91ed57f-5438-4d99-a17e-6723610f7ad9"}});
+                thumbnail = await tiff.getImage(4)
+                const data = await thumbnail.readRasters();
+                const canvas = document.getElementById("plot");
+                const plot = new plotty.plot({
+                        canvas,
+                        data: data[2],
+                        width: thumbnail.getWidth(),
+                        height: thumbnail.getHeight(),
+                        domain: [46, 4000],
+                        colorScale: "greys"
+                    });
+                plot.render();
+                const status = document.getElementById("status")
+                status.innerHTML = ""
+            })()
+      </script>
+  </body>
+</html>
