@@ -112,6 +112,19 @@ resource "aws_api_gateway_integration_response" "filekey_get" {
   }
 }
 
+
+resource "aws_api_gateway_integration_response" "filekey_get_206" {
+  rest_api_id       = aws_api_gateway_rest_api.tile.id
+  resource_id       = aws_api_gateway_resource.filekey.id
+  http_method       = aws_api_gateway_method.filekey_get.http_method
+  status_code       = 206
+  selection_pattern = "206"
+  depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get]
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
+  }
+}
+
 resource "aws_api_gateway_integration_response" "filekey_get_404" {
   rest_api_id       = aws_api_gateway_rest_api.tile.id
   resource_id       = aws_api_gateway_resource.filekey.id
@@ -143,5 +156,23 @@ resource "aws_api_gateway_integration_response" "filekey_options" {
 
   response_templates = {
     "application/json" = ""
+  }
+}
+
+resource "aws_api_gateway_integration_response" "filekey_head" {
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  resource_id = aws_api_gateway_resource.filekey.id
+  http_method = aws_api_gateway_method.filekey_head.http_method
+  status_code = aws_api_gateway_method_response.filekey_head.status_code
+  depends_on  = [aws_api_gateway_method.filekey_head, aws_api_gateway_integration.filekey_head]
+  response_templates = {
+    "application/json" = ""
+  }
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
+    "method.response.header.accept-ranges"               = "integration.response.header.accept-ranges"
+    "method.response.header.Content-Type"                = "integration.response.header.Content-Type"
+    "method.response.header.Content-Encoding"            = "integration.response.header.Content-Encoding"
+    "method.response.header.Content-Length"              = "integration.response.header.Content-Length"
   }
 }

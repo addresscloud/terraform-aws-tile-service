@@ -80,3 +80,18 @@ resource "aws_api_gateway_method" "filekey_options" {
     "method.request.path.filekey"  = true
   }
 }
+
+resource "aws_api_gateway_method" "filekey_head" {
+  rest_api_id      = aws_api_gateway_rest_api.tile.id
+  resource_id      = aws_api_gateway_resource.filekey.id
+  http_method      = "HEAD"
+  authorization    = var.api_custom_authorizer_arn != "" ? "CUSTOM" : "NONE"
+  authorizer_id    = var.api_custom_authorizer_arn != "" ? var.api_custom_authorizer_arn : null
+  api_key_required = var.api_require_api_key
+  request_parameters = {
+    "method.request.header.range"  = true
+    "method.request.path.tilefile" = true
+    "method.request.path.version"  = true
+    "method.request.path.filekey"  = true
+  }
+}

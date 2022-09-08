@@ -107,3 +107,22 @@ resource "aws_api_gateway_integration" "filekey_options" {
     )
   }
 }
+
+resource "aws_api_gateway_integration" "filekey_head" {
+  rest_api_id             = aws_api_gateway_rest_api.tile.id
+  resource_id             = aws_api_gateway_resource.filekey.id
+  http_method             = aws_api_gateway_method.filekey_head.http_method
+  type                    = "AWS"
+  integration_http_method = "HEAD"
+  credentials             = aws_iam_role.tile.arn
+  uri                     = "arn:aws:apigateway:${var.api_region}:s3:path/${var.s3_bucket_name}/{tilefile}/{version}/{filekey}"
+  request_parameters = {
+    "integration.request.header.range"  = "method.request.header.range"
+    "integration.request.path.tilefile" = "method.request.path.tilefile"
+    "integration.request.path.version"  = "method.request.path.version"
+    "integration.request.path.filekey"  = "method.request.path.filekey"
+  }
+  depends_on = [
+    aws_api_gateway_method.filekey_head
+  ]
+}

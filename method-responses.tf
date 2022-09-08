@@ -118,6 +118,31 @@ resource "aws_api_gateway_method_response" "filekey_get" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Credentials" = true
     "method.response.header.Access-Control-Allow-Origin"      = true
+    "method.response.header.accept-ranges"                    = true
+    "method.response.header.Content-Type"                     = true
+    "method.response.header.Content-Encoding"                 = true
+    "method.response.header.Content-Length"                   = true
+  }
+  response_models = {
+    "application/json" = "Empty"
+  }
+  depends_on = [
+    aws_api_gateway_method.filekey_get
+  ]
+}
+
+resource "aws_api_gateway_method_response" "filekey_get_206" {
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  resource_id = aws_api_gateway_resource.filekey.id
+  http_method = aws_api_gateway_method.filekey_get.http_method
+  status_code = "206"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Credentials" = true
+    "method.response.header.Access-Control-Allow-Origin"      = true
+    "method.response.header.accept-ranges"                    = true
+    "method.response.header.Content-Type"                     = true
+    "method.response.header.Content-Encoding"                 = true
+    "method.response.header.Content-Length"                   = true
   }
   response_models = {
     "application/json" = "Empty"
@@ -132,14 +157,16 @@ resource "aws_api_gateway_method_response" "filekey_options" {
   resource_id = aws_api_gateway_resource.filekey.id
   http_method = aws_api_gateway_method.filekey_options.http_method
   status_code = "200"
-
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Credentials" = true
-    "method.response.header.Access-Control-Allow-Headers"     = true
     "method.response.header.Access-Control-Allow-Methods"     = true
+    "method.response.header.Access-Control-Allow-Headers"     = true
+    "method.response.header.Access-Control-Allow-Credentials" = true
     "method.response.header.Access-Control-Allow-Origin"      = true
+    "method.response.header.accept-ranges"                    = true
+    "method.response.header.Content-Type"                     = true
+    "method.response.header.Content-Encoding"                 = true
+    "method.response.header.Content-Length"                   = true
   }
-
   response_models = {
     "application/json" = "Empty"
   }
@@ -155,11 +182,36 @@ resource "aws_api_gateway_method_response" "filekey_get_404" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Credentials" = true
     "method.response.header.Access-Control-Allow-Origin"      = true
+    "method.response.header.accept-ranges"                    = true
+    "method.response.header.Content-Type"                     = true
+    "method.response.header.Content-Encoding"                 = true
+    "method.response.header.Content-Length"                   = true
   }
   response_models = {
     "application/json" = "Empty"
   }
   depends_on = [
     aws_api_gateway_method.filekey_get
+  ]
+}
+
+resource "aws_api_gateway_method_response" "filekey_head" {
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  resource_id = aws_api_gateway_resource.filekey.id
+  http_method = aws_api_gateway_method.filekey_head.http_method
+  status_code = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Credentials" = true
+    "method.response.header.Access-Control-Allow-Origin"      = true
+    "method.response.header.accept-ranges"                    = true
+    "method.response.header.Content-Type"                     = true
+    "method.response.header.Content-Encoding"                 = true
+    "method.response.header.Content-Length"                   = true
+  }
+  response_models = {
+    "application/json" = "Empty"
+  }
+  depends_on = [
+    aws_api_gateway_method.filekey_head
   ]
 }
