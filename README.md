@@ -114,13 +114,13 @@ GET /{API_INVOKE_URL}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
-#### **Get a tileset tile**
+#### **Get Tileset tile**
 ```http
 GET /{API_INVOKE_URL}/v1/{tileset}/{version}/{z}/{x}/{y}
 X-Api-Key: {API_KEY}
 ```
 
-#### **Get tilefile tile**
+#### **Get part of a Tilefile**
 ```http
 GET /{API_INVOKE_URL}/v1/{tilefile}/{version}/{file.extension}
 X-Api-Key: {API_KEY}
