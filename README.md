@@ -110,7 +110,7 @@ The API exposes the following endpoints:
 
 #### **Get TileJSON**
 ```http
-GET /{APP_INVOKE_URL}/v1/{tileset}/
+GET /{API_INVOKE_URL}/v1/{tileset}/
 X-Api-Key: {API_KEY}
 ```
 
@@ -156,7 +156,7 @@ The module includes a `v1` in the path to future proof against breaking changes 
 |[Vector tileset](https://addresscloud.github.io/terraform-aws-tile-service/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/index.html)|/tileset|MapLibre|Compressed protocol-buffers (.pbf)|OpenMapTiles|
 |[Raster tileset](https://addresscloud.github.io/terraform-aws-tile-service/raster/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/raster/index.html)|/tileset|MapLibre|Portable network graphic (.png)|Sentinel/ESA|
 |[PMTile](https://addresscloud.github.io/terraform-aws-tile-service/pmtile/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/pmtile/index.html)|/tilefile|MapLibre + PMTile plugin|PMTile|OpenMapTiles|
-|[COG](https://addresscloud.github.io/terraform-aws-tile-service/cog/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/cog/index.html)|/tilefile|Geotiff.js|Cloud Optimised GeoTiff|Sentinel/ESA|
+|[COG](https://addresscloud.github.io/terraform-aws-tile-service/cog/)|[github](https://github.com/addresscloud/terraform-aws-tile-service/blob/demo/cog/index.html)|/tilefile|Geotiff.js + Plotty|Cloud Optimised GeoTiff|Sentinel/ESA|
 
 ## Configuration Examples
 
@@ -193,4 +193,4 @@ PRs accepted.
 
 ### License
 
-MIT © 2022 Addresscloud Limited
+[MIT](https://github.com/addresscloud/terraform-aws-tile-service/blob/main/LICENSE) © 2022 Addresscloud Limited
