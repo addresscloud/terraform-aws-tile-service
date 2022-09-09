@@ -150,7 +150,7 @@ resource "aws_api_gateway_integration_response" "filekey_options" {
   content_handling = "CONVERT_TO_TEXT"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = var.api_access_control_allow_headers
-    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,HEAD,OPTIONS'"
     "method.response.header.Access-Control-Allow-Origin"  = var.api_access_control_allow_origin
   }
 
