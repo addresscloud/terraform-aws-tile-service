@@ -25,6 +25,12 @@ variable "api_access_control_allow_headers" {
   type        = string
 }
 
+variable "api_binary_media_types" {
+  description = "Tuple of binary media types for the API."
+  default     = ["application/x-protobuf", "application/x-www-form-urlencoded", "image/*"]
+  type        = list(string)
+}
+
 variable "api_cache_size" {
   description = "API cache cluster size in gigabytes. Used to cache responses from the GET tile endpoint, requests to tile.json are not cached. Allowed values include `0.5`, `1.6`, `6.1`, `13.5`, `28.4`, `58.2`, `118` and `237`. Note that API caching is not covered by the AWS Free Tier and will incur an hourly charge."
   default     = 0
