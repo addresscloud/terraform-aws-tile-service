@@ -179,7 +179,7 @@ API Gateway is particularly useful when authorization is required to protect non
 
 These alternatives influenced the design of this module should be considered if API Gateway features are not needed.
 
-- [CloudFront + S3](https://github.com/addresscloud/serverless-tiles) the cheapest way to self-host tiles
+- [CloudFront + S3](https://github.com/addresscloud/serverless-tiles) the leanest way to self-host tiles
 - [TiTiler](https://github.com/developmentseed/titiler) supports multiple data types including rasters using Lambda functions
 - [MapTiler Cloud](https://www.maptiler.com/cloud/) excellent commercial solution when self-hosting is not required
 
