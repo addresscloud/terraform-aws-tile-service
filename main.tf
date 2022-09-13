@@ -44,7 +44,7 @@ resource "aws_s3_bucket_public_access_block" "tile" {
 }
 
 resource "aws_api_gateway_rest_api" "tile" {
-  name               = "tile"
+  name               = var.api_name
   description        = "Tile service"
   binary_media_types = var.api_binary_media_types
 }
