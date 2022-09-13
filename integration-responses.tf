@@ -119,7 +119,7 @@ resource "aws_api_gateway_integration_response" "filekey_get_206" {
   http_method       = aws_api_gateway_method.filekey_get.http_method
   status_code       = 206
   selection_pattern = "206"
-  depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get]
+  depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get, aws_api_gateway_method_response.filekey_get_206]
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
   }
@@ -131,7 +131,7 @@ resource "aws_api_gateway_integration_response" "filekey_get_404" {
   http_method       = aws_api_gateway_method.filekey_get.http_method
   status_code       = 404
   selection_pattern = "404"
-  depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get]
+  depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get, aws_api_gateway_method_response.filekey_get_404]
   content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
