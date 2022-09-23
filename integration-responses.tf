@@ -108,7 +108,8 @@ resource "aws_api_gateway_integration_response" "filekey_get" {
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    // TODO  content-type application/octo?
+    "method.response.header.Content-Type"                = "integration.response.header.Content-Type"
+    "method.response.header.Content-Encoding"            = "integration.response.header.Content-Encoding"
   }
 }
 
