@@ -173,7 +173,8 @@ The module uses Amazon API Gateway and S3 to provision a vector tile API suitabl
 API Gateway is particularly useful when authorization is required to protect non-public data sources. S3 provides a secure and scaleable storage backend and when used with API Gateway removes the need for any server-side logic or functions. The module's serverless architecture means that the service is highly-scaleable.
 
 ## Presentations
-- [FOSS4G 2022 slides](https://addresscloud.github.io/terraform-aws-tile-service/decks/foss4g-20220825.pdf)
+- [FOSS4G 2022 lightning talk slides](https://addresscloud.github.io/terraform-aws-tile-service/decks/foss4g-20220825.pdf)
+- [FOSS4G UK 2022 presentation recording](https://www.youtube.com/watch?v=c5MR2CmM6-M)
 
 ### Alternatives
 
