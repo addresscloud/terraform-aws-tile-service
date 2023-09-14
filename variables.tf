@@ -86,7 +86,13 @@ variable "api_throttling_rate_limit" {
 }
 
 variable "s3_bucket_policy" {
-  description = "A customised policy for the S3 bucket to support advanced use cases"
+  description = "A customised policy for the S3 bucket to support advanced use cases."
+  default     = ""
+  type        = string
+}
+
+variable "tile_json_integration_override" {
+  description = "Optional override for the TileJson integration URI."
   default     = ""
   type        = string
 }

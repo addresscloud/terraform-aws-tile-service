@@ -1,3 +1,7 @@
+locals {
+  tile_json_uri = var.tile_json_integration_override != "" ? var.tile_json_integration_override : "arn:aws:apigateway:${var.api_region}:s3:path/${var.s3_bucket_name}/{tileset}/tile.json"
+}
+
 resource "aws_api_gateway_integration" "json_get" {
   rest_api_id             = aws_api_gateway_rest_api.tile.id
   resource_id             = aws_api_gateway_resource.tileset.id
@@ -5,7 +9,7 @@ resource "aws_api_gateway_integration" "json_get" {
   type                    = "AWS"
   integration_http_method = "GET"
   credentials             = aws_iam_role.tile.arn
-  uri                     = "arn:aws:apigateway:${var.api_region}:s3:path/${var.s3_bucket_name}/{tileset}/tile.json"
+  uri                     = local.tile_json_uri
   request_parameters = {
     "integration.request.path.tileset" = "method.request.path.tileset"
   }
