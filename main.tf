@@ -12,6 +12,6 @@ resource "aws_api_gateway_rest_api" "tile" {
 module "bucket" {
   source = "./modules/s3"
   for_each = local.buckets_to_create
-  s3_bucket_name = each.value
+  s3_bucket_name = each.value.name
   s3_bucket_policy = local.bucket_policy
 }
