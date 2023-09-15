@@ -91,6 +91,12 @@ variable "s3_bucket_policy" {
   type        = string
 }
 
+variable "s3_skip_creation" {
+  description = "Optional override to skip creation of the S3 bucket and policies. Useful for when the bucket is created outside of Terraform."
+  default     = false
+  type        = bool
+}
+
 variable "tile_json_integration_override" {
   description = "Optional override for the TileJson integration URI."
   default     = ""
