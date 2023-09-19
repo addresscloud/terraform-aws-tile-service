@@ -3,11 +3,11 @@ resource "aws_iam_role" "tile" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
-resource "aws_iam_policy_attachment" "policies" {
-  for_each   = toset(local.execution_role_policies)
+resource "aws_iam_policy_attachment" "tile_role_policies" {
+  for_each   = local.execution_role_policies
   name       = each.key
   roles      = [aws_iam_role.tile.name]
-  policy_arn = each.key
+  policy_arn = each.value
 }
 
 resource "aws_api_gateway_rest_api" "tile" {
