@@ -85,6 +85,12 @@ variable "api_throttling_rate_limit" {
   type        = number
 }
 
+variable "api_execution_role_policy_arns" {
+  description = "ARNs of additional policies to be attached to the API execution role."
+  default     = []
+  type        = list
+}
+
 variable "s3_bucket_policy" {
   description = "A customised policy for the S3 bucket to support advanced use cases."
   default     = ""
