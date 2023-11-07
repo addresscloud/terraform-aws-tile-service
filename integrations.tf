@@ -5,7 +5,7 @@ resource "aws_api_gateway_integration" "json_get" {
   type                    = "AWS"
   integration_http_method = "GET"
   credentials             = aws_iam_role.tile.arn
-  uri                     = "arn:aws:apigateway:${var.api_region}:s3:path/${var.s3_bucket_name}/{tileset}/tile.json"
+  uri                     = local.tile_json_uri
   request_parameters = {
     "integration.request.path.tileset" = "method.request.path.tileset"
   }

@@ -25,8 +25,8 @@ data "aws_iam_policy_document" "bucket" {
       ]
     }
     resources = [
-      aws_s3_bucket.tile.arn,
-      "${aws_s3_bucket.tile.arn}/*"
+      local.bucket_arn,
+      "${local.bucket_arn}/*"
     ]
   }
   statement {
@@ -39,8 +39,8 @@ data "aws_iam_policy_document" "bucket" {
     }
     effect = "Deny"
     resources = [
-      aws_s3_bucket.tile.arn,
-      "${aws_s3_bucket.tile.arn}/*"
+      local.bucket_arn,
+      "${local.bucket_arn}/*"
     ]
     principals {
       type        = "*"

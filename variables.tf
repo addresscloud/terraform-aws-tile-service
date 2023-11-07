@@ -85,8 +85,26 @@ variable "api_throttling_rate_limit" {
   type        = number
 }
 
+variable "api_execution_role_policy_arns" {
+  description = "Names and ARNs of additional policies to be attached to the API execution role."
+  default     = {}
+  type        = map(any)
+}
+
 variable "s3_bucket_policy" {
-  description = "A customised policy for the S3 bucket to support advanced use cases"
+  description = "A customised policy for the S3 bucket to support advanced use cases."
+  default     = ""
+  type        = string
+}
+
+variable "s3_skip_creation" {
+  description = "Optional override to skip creation of the S3 bucket and policies. Useful for when the bucket is created outside of Terraform."
+  default     = false
+  type        = bool
+}
+
+variable "tile_json_integration_override" {
+  description = "Optional override for the TileJson integration URI."
   default     = ""
   type        = string
 }
