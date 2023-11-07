@@ -27,7 +27,7 @@ resource "aws_api_gateway_stage" "tile" {
   stage_name            = each.value.name
   rest_api_id           = aws_api_gateway_rest_api.tile.id
   deployment_id         = aws_api_gateway_deployment.tile[each.key].id
-  cache_cluster_enabled = each.value.cach_size != 0 ? true : false
-  cache_cluster_size    = each.value.cach_size != 0 ? each.value.cache_size : null
+  cache_cluster_enabled = each.value.cache_size != 0 ? true : false
+  cache_cluster_size    = each.value.cache_size != 0 ? each.value.cache_size : null
   xray_tracing_enabled  = each.value.xray_tracing_enabled
 }
