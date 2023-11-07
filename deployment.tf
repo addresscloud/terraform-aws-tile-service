@@ -3,8 +3,6 @@ locals {
 }
 
 resource "aws_api_gateway_deployment" "tile" {
-  for_each = var.api_stages
-
   rest_api_id = aws_api_gateway_rest_api.tile.id
   description = local.trigger
   lifecycle {
@@ -23,11 +21,11 @@ resource "aws_api_gateway_deployment" "tile" {
 }
 
 resource "aws_api_gateway_stage" "tile" {
-  for_each              = var.api_stages
-  stage_name            = each.value.name
+  stage_name            = var.api_stage_name
   rest_api_id           = aws_api_gateway_rest_api.tile.id
-  deployment_id         = aws_api_gateway_deployment.tile[each.key].id
-  cache_cluster_enabled = each.value.cach_size != 0 ? true : false
-  cache_cluster_size    = each.value.cach_size != 0 ? each.value.cache_size : null
-  xray_tracing_enabled  = each.value.xray_tracing_enabled
+  deployment_id         = aws_api_gateway_deployment.tile.id
+  cache_cluster_enabled = var.api_cache_size != 0 ? true : false
+  cache_cluster_size    = var.api_cache_size != 0 ? var.api_cache_size : null
+  xray_tracing_enabled  = false
+  depends_on            = [aws_api_gateway_deployment.tile]
 }
