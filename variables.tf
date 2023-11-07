@@ -31,18 +31,6 @@ variable "api_binary_media_types" {
   type        = list(string)
 }
 
-variable "api_cache_size" {
-  description = "API cache cluster size in gigabytes. Used to cache responses from the GET tile endpoint, requests to tile.json are not cached. Allowed values include `0.5`, `1.6`, `6.1`, `13.5`, `28.4`, `58.2`, `118` and `237`. Note that API caching is not covered by the AWS Free Tier and will incur an hourly charge."
-  default     = 0
-  type        = number
-}
-
-variable "api_cache_ttl" {
-  description = "API cache ttl in seconds. Used to set cache duration for responses from the GET tile endpoint. Setting to 0 disables caching. Allowed values range from `0` to `3600`."
-  default     = 0
-  type        = number
-}
-
 variable "api_custom_authorizer_arn" {
   description = "ARN for custom authorizer Lambda function triggered for all endpoints."
   default     = ""
@@ -67,26 +55,31 @@ variable "api_require_api_key" {
   type        = bool
 }
 
-variable "api_stage_name" {
-  description = "Name for API stage."
-  default     = "default"
-  type        = string
-}
+# variable "api_throttling_burst_limit" {
+#   description = "API burst limit tps. Maximum burst limit of transactions per second allowed for this API. Defaults to `100`. Use this setting to prevent the tile service from consuming too too many burst many transactions from the AWS account quota."
+#   default     = 100
+#   type        = number
+# }
 
-variable "api_throttling_burst_limit" {
-  description = "API burst limit tps. Maximum burst limit of transactions per second allowed for this API. Defaults to `100`. Use this setting to prevent the tile service from consuming too too many burst many transactions from the AWS account quota."
-  default     = 100
-  type        = number
-}
-
-variable "api_throttling_rate_limit" {
-  description = "API rate limit tps. Maximum limit of transactions per second allowed for this API. Defaults to `500`. Use this setting to prevent the tile service from consuming too many transactions from the AWS account quota."
-  default     = 500
-  type        = number
-}
+# variable "api_throttling_rate_limit" {
+#   description = "API rate limit tps. Maximum limit of transactions per second allowed for this API. Defaults to `500`. Use this setting to prevent the tile service from consuming too many transactions from the AWS account quota."
+#   default     = 500
+#   type        = number
+# }
 
 variable "s3_bucket_policy" {
   description = "A customised policy for the S3 bucket to support advanced use cases"
   default     = ""
   type        = string
+}
+
+variable "api_stages" {
+  type = map(object({
+    name = string
+    cache_size = optional(number, 0)
+    cache_ttl = optional(number, 0)
+    throttling_burst_limit = optional(number, 100)
+    throttling_rate_limit = optional(number, 500)
+    xray_tracing_enabled = optional(bool, false)
+  }))
 }
