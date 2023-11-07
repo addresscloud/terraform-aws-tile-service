@@ -69,12 +69,12 @@ variable "api_require_api_key" {
 
 variable "api_stages" {
   type = map(object({
-    name = string
-    cache_size = optional(number, 0)
-    cache_ttl = optional(number, 0)
+    name                   = string
+    cache_size             = optional(number, 0)
+    cache_ttl              = optional(number, 0)
     throttling_burst_limit = optional(number, 100)
-    throttling_rate_limit = optional(number, 500)
-    xray_tracing_enabled = optional(bool, false)
+    throttling_rate_limit  = optional(number, 500)
+    xray_tracing_enabled   = optional(bool, false)
   }))
 }
 
