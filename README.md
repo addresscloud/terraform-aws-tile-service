@@ -165,6 +165,7 @@ The module includes a `v1` in the path to future proof against breaking changes 
 - [custom domain name](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/custom-domain)
 - [deployment trigger](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/deployment-trigger)
 - [lambda authorization](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/lambda-authorizer)
+- [tilejson response template](https://github.com/addresscloud/terraform-aws-tile-service/tree/main/examples/tilejson-response-template)
 
 ## About
 
