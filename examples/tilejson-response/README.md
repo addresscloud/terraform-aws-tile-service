@@ -1,6 +1,6 @@
 # TileJSON Integration Response Template Example
 
-This example extends the [Custom domain name example](../custom-domain/) to re-write the TileJSON response on-the-fly using an API Gateway Mapping Template.
+This example extends the [Custom domain name example](../custom-domain/) to rewrite the TileJSON response on-the-fly using an API Gateway Mapping Template.
 
 For example, given the TileJSON below the "<DOMAIN_PREFIX>" value is substitute for the `$context.domainPrefix` variable[^1] after the TileJSON has been returned from S3. This on-the-fly substitution is useful in cases where TileJSON files are shared between different instances of the module.
 
