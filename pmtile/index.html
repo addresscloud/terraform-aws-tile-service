@@ -20,8 +20,7 @@
       <link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet"/>
       <script src="osm-liberty-pmtile.js"></script>
       <link href="../common/style.css" rel="stylesheet"/>
-      <script src="fflate.js"></script>
-      <script src="pmtiles.js"></script>
+      <script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"></script>
   </head>
 
   <body>
@@ -35,8 +34,20 @@
       </span>
       <div id="map"></div>
       <script>
-        let cache = new pmtiles.ProtocolCache();
-        maplibregl.addProtocol("pmtiles",cache.protocol);
+        // See https://github.com/protomaps/PMTiles/blob/main/js/examples/maplibre_headers.html
+        // Big thanks to @bdon (https://github.com/bdon) for making headers work.
+        // Protocol for PMTiles
+        let protocol = new pmtiles.Protocol();
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+        
+        // PMTiles source with headers - note PMTILES_URL must match the URL in the style file.
+        let PMTILES_URL = "https://tile-demo.addresscloud.com/v1/tilefile/opmosm-pmtile/20220825/florence.pmtiles";
+        let source = new pmtiles.FetchSource(PMTILES_URL, new Headers({'x-api-key': "DEMO-KEY-b91ed57f-5438-4d99-a17e-6723610f7ad9"}));
+        
+        // Add PMTiles source to protocol
+        const p = new pmtiles.PMTiles(source);
+        protocol.add(p);
+
           var map = new maplibregl.Map({
               attributionControl: false,
               container: 'map',
