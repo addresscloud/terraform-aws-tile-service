@@ -120,7 +120,7 @@ resource "aws_api_gateway_integration_response" "tile_get_403" {
   depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get, aws_api_gateway_method_response.tile_get_403]
   content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
-    "application/json" = "{\"message\":\"Request could not be completed\"}"
+    "application/json" = "{\"message\":\"Forbidden\"}"
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
@@ -218,7 +218,7 @@ resource "aws_api_gateway_integration_response" "filekey_get_403" {
   depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get, aws_api_gateway_method_response.filekey_get_403]
   content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
-    "application/json" = "{\"message\":\"Request could not be completed\"}"
+    "application/json" = "{\"message\":\"Forbidden\"}"
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
