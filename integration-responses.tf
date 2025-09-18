@@ -59,7 +59,6 @@ resource "aws_api_gateway_integration_response" "json_get_403_bodypattern" {
 
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 
   depends_on = [
@@ -132,7 +131,6 @@ resource "aws_api_gateway_integration_response" "tile_get_404" {
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 }
 
@@ -149,7 +147,6 @@ resource "aws_api_gateway_integration_response" "tile_get_403" {
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 }
 
@@ -168,7 +165,6 @@ resource "aws_api_gateway_integration_response" "tile_get_403_bodypattern" {
 
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 
   depends_on = [
@@ -190,7 +186,6 @@ resource "aws_api_gateway_integration_response" "tile_get_500" {
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 }
 
@@ -271,7 +266,6 @@ resource "aws_api_gateway_integration_response" "filekey_get_403" {
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 }
 
@@ -288,7 +282,6 @@ resource "aws_api_gateway_integration_response" "filekey_get_500" {
   }
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-    "method.response.header.Content-Type"                = "'application/json'"
   }
 }
 
