@@ -19,7 +19,6 @@ resource "aws_api_gateway_integration_response" "json_get_404" {
   status_code       = 404
   selection_pattern = "404"
   depends_on        = [aws_api_gateway_method.json_get, aws_api_gateway_integration.json_get]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
@@ -35,7 +34,6 @@ resource "aws_api_gateway_integration_response" "json_get_403" {
   status_code       = aws_api_gateway_method_response.json_get_403.status_code
   selection_pattern = "403"
   depends_on        = [aws_api_gateway_method.json_get, aws_api_gateway_integration.json_get, aws_api_gateway_method_response.json_get_403]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Forbidden\"}"
   }
@@ -51,7 +49,6 @@ resource "aws_api_gateway_integration_response" "json_get_403_bodypattern" {
   status_code = aws_api_gateway_method_response.json_get_403.status_code
   # Match the S3 XML error in the body (works even if upstream status is 200)
   selection_pattern = ".*<Code>AccessDenied</Code>.*"
-  content_handling  = "CONVERT_TO_TEXT"
 
   response_templates = {
     "application/json" = "{\"message\":\"Forbidden\"}"
@@ -74,7 +71,6 @@ resource "aws_api_gateway_integration_response" "json_get_500" {
   status_code       = aws_api_gateway_method_response.json_get_500.status_code
   selection_pattern = "5\\d{2}"
   depends_on        = [aws_api_gateway_method.json_get, aws_api_gateway_integration.json_get, aws_api_gateway_method_response.json_get_500]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Unexpected error\"}"
   }
@@ -90,7 +86,6 @@ resource "aws_api_gateway_integration_response" "json_options" {
   http_method      = aws_api_gateway_method.json_options.http_method
   status_code      = aws_api_gateway_method_response.json_options.status_code
   depends_on       = [aws_api_gateway_method.json_options, aws_api_gateway_integration.json_options]
-  content_handling = "CONVERT_TO_TEXT"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = var.api_access_control_allow_headers
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'"
@@ -125,7 +120,6 @@ resource "aws_api_gateway_integration_response" "tile_get_404" {
   status_code       = 404
   selection_pattern = "404"
   depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
@@ -141,7 +135,6 @@ resource "aws_api_gateway_integration_response" "tile_get_403" {
   status_code       = aws_api_gateway_method_response.tile_get_403.status_code
   selection_pattern = "403"
   depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get, aws_api_gateway_method_response.tile_get_403]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Forbidden\"}"
   }
@@ -157,7 +150,6 @@ resource "aws_api_gateway_integration_response" "tile_get_403_bodypattern" {
   status_code = aws_api_gateway_method_response.tile_get_403.status_code
   # Match the S3 XML error in the body (works even if upstream status is 200)
   selection_pattern = ".*<Code>AccessDenied</Code>.*"
-  content_handling  = "CONVERT_TO_TEXT"
 
   response_templates = {
     "application/json" = "{\"message\":\"Forbidden\"}"
@@ -180,7 +172,6 @@ resource "aws_api_gateway_integration_response" "tile_get_500" {
   status_code       = aws_api_gateway_method_response.tile_get_500.status_code
   selection_pattern = "5\\d{2}"
   depends_on        = [aws_api_gateway_method.tile_get, aws_api_gateway_integration.tile_get, aws_api_gateway_method_response.tile_get_500]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Unexpected error\"}"
   }
@@ -195,7 +186,6 @@ resource "aws_api_gateway_integration_response" "tile_options" {
   http_method      = aws_api_gateway_method.tile_options.http_method
   status_code      = aws_api_gateway_method_response.tile_options.status_code
   depends_on       = [aws_api_gateway_method.tile_options, aws_api_gateway_integration.tile_options]
-  content_handling = "CONVERT_TO_TEXT"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = var.api_access_control_allow_headers
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'"
@@ -244,7 +234,6 @@ resource "aws_api_gateway_integration_response" "filekey_get_404" {
   status_code       = 404
   selection_pattern = "404"
   depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get, aws_api_gateway_method_response.filekey_get_404]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Not found\"}"
   }
@@ -260,7 +249,6 @@ resource "aws_api_gateway_integration_response" "filekey_get_403" {
   status_code       = aws_api_gateway_method_response.filekey_get_403.status_code
   selection_pattern = "403"
   depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get, aws_api_gateway_method_response.filekey_get_403]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Forbidden\"}"
   }
@@ -276,7 +264,6 @@ resource "aws_api_gateway_integration_response" "filekey_get_500" {
   status_code       = aws_api_gateway_method_response.filekey_get_500.status_code
   selection_pattern = "5\\d{2}"
   depends_on        = [aws_api_gateway_method.filekey_get, aws_api_gateway_integration.filekey_get, aws_api_gateway_method_response.filekey_get_500]
-  content_handling  = "CONVERT_TO_TEXT"
   response_templates = {
     "application/json" = "{\"message\":\"Unexpected error\"}"
   }
