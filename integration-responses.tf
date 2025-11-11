@@ -59,11 +59,11 @@ resource "aws_api_gateway_integration_response" "json_get_500" {
 
 
 resource "aws_api_gateway_integration_response" "json_options" {
-  rest_api_id      = aws_api_gateway_rest_api.tile.id
-  resource_id      = aws_api_gateway_resource.tileset.id
-  http_method      = aws_api_gateway_method.json_options.http_method
-  status_code      = aws_api_gateway_method_response.json_options.status_code
-  depends_on       = [aws_api_gateway_method.json_options, aws_api_gateway_integration.json_options]
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  resource_id = aws_api_gateway_resource.tileset.id
+  http_method = aws_api_gateway_method.json_options.http_method
+  status_code = aws_api_gateway_method_response.json_options.status_code
+  depends_on  = [aws_api_gateway_method.json_options, aws_api_gateway_integration.json_options]
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = var.api_access_control_allow_headers
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'"
@@ -137,11 +137,11 @@ resource "aws_api_gateway_integration_response" "tile_get_500" {
 }
 
 resource "aws_api_gateway_integration_response" "tile_options" {
-  rest_api_id      = aws_api_gateway_rest_api.tile.id
-  resource_id      = aws_api_gateway_resource.y.id
-  http_method      = aws_api_gateway_method.tile_options.http_method
-  status_code      = aws_api_gateway_method_response.tile_options.status_code
-  depends_on       = [aws_api_gateway_method.tile_options, aws_api_gateway_integration.tile_options]
+  rest_api_id = aws_api_gateway_rest_api.tile.id
+  resource_id = aws_api_gateway_resource.y.id
+  http_method = aws_api_gateway_method.tile_options.http_method
+  status_code = aws_api_gateway_method_response.tile_options.status_code
+  depends_on  = [aws_api_gateway_method.tile_options, aws_api_gateway_integration.tile_options]
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = var.api_access_control_allow_headers
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'"
