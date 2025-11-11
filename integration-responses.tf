@@ -42,28 +42,6 @@ resource "aws_api_gateway_integration_response" "json_get_403" {
   }
 }
 
-resource "aws_api_gateway_integration_response" "json_get_403_bodypattern" {
-  rest_api_id = aws_api_gateway_rest_api.tile.id
-  resource_id = aws_api_gateway_resource.tileset.id
-  http_method = aws_api_gateway_method.json_get.http_method
-  status_code = aws_api_gateway_method_response.json_get_403.status_code
-  # Match the S3 XML error in the body (works even if upstream status is 200)
-  selection_pattern = ".*<Code>AccessDenied</Code>.*"
-
-  response_templates = {
-    "application/json" = "{\"message\":\"Forbidden\"}"
-  }
-
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-  }
-
-  depends_on = [
-    aws_api_gateway_integration.json_get,
-    aws_api_gateway_method_response.json_get_403
-  ]
-}
-
 resource "aws_api_gateway_integration_response" "json_get_500" {
   rest_api_id       = aws_api_gateway_rest_api.tile.id
   resource_id       = aws_api_gateway_resource.tileset.id
@@ -141,28 +119,6 @@ resource "aws_api_gateway_integration_response" "tile_get_403" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
   }
-}
-
-resource "aws_api_gateway_integration_response" "tile_get_403_bodypattern" {
-  rest_api_id = aws_api_gateway_rest_api.tile.id
-  resource_id = aws_api_gateway_resource.tileset.id
-  http_method = aws_api_gateway_method.tile_get.http_method
-  status_code = aws_api_gateway_method_response.tile_get_403.status_code
-  # Match the S3 XML error in the body (works even if upstream status is 200)
-  selection_pattern = ".*<Code>AccessDenied</Code>.*"
-
-  response_templates = {
-    "application/json" = "{\"message\":\"Forbidden\"}"
-  }
-
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin" = var.api_access_control_allow_origin
-  }
-
-  depends_on = [
-    aws_api_gateway_integration.tile_get,
-    aws_api_gateway_method_response.tile_get_403
-  ]
 }
 
 resource "aws_api_gateway_integration_response" "tile_get_500" {
