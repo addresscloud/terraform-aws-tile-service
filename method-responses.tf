@@ -125,7 +125,6 @@ resource "aws_api_gateway_method_response" "tile_get_404" {
   status_code = "404"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
-    "method.response.header.Content-Encoding"            = true
     "method.response.header.Content-Type"                = true
   }
   response_models = {
@@ -143,7 +142,6 @@ resource "aws_api_gateway_method_response" "tile_get_403" {
   status_code = "403"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
-    "method.response.header.Content-Encoding"            = true
     "method.response.header.Content-Type"                = true
   }
   response_models = {
@@ -161,7 +159,6 @@ resource "aws_api_gateway_method_response" "tile_get_500" {
   status_code = "500"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
-    "method.response.header.Content-Encoding"            = true
     "method.response.header.Content-Type"                = true
   }
   response_models = {
@@ -240,10 +237,7 @@ resource "aws_api_gateway_method_response" "filekey_get_404" {
   status_code = "404"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
-    "method.response.header.accept-ranges"               = true
     "method.response.header.Content-Type"                = true
-    "method.response.header.Content-Encoding"            = true
-    "method.response.header.Content-Length"              = true
   }
   response_models = {
     "application/json" = "Empty"
@@ -260,10 +254,7 @@ resource "aws_api_gateway_method_response" "filekey_get_403" {
   status_code = "403"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
-    "method.response.header.accept-ranges"               = true
     "method.response.header.Content-Type"                = true
-    "method.response.header.Content-Encoding"            = true
-    "method.response.header.Content-Length"              = true
   }
   response_models = {
     "application/json" = "Empty"
@@ -280,10 +271,7 @@ resource "aws_api_gateway_method_response" "filekey_get_500" {
   status_code = "500"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = true
-    "method.response.header.accept-ranges"               = true
     "method.response.header.Content-Type"                = true
-    "method.response.header.Content-Encoding"            = true
-    "method.response.header.Content-Length"              = true
   }
   response_models = {
     "application/json" = "Empty"
